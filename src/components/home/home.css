@@ -1,0 +1,84 @@
+.presentationDiv {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("/bookshelf.jpg");
+  min-width: 300px;
+  min-height: 500px; }
+
+.siteOnDevices {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: calc(100% - (2 * 25px));
+  min-height: 230px;
+  margin: 25px;
+  background-image: url("/mockups.png"); }
+
+.howItWorkCardImg {
+  height: 150px; }
+
+.MuiCard-root {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+
+.tabsContainer {
+  background-color: indigo; }
+
+.tableImage {
+  max-height: 150px;
+  max-width: 200px; }
+
+.genresCards {
+  height: 150px; }
+
+.tableFrontPage {
+  border: darkgray 2px; }
+
+.opinionImage {
+  max-width: 600px;
+  max-height: 600px; }
+
+.noOverflow {
+  overflow: hidden; }
+
+.width100 {
+  width: 100%; }
+
+.newsletterImage {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url("/person_reading_book.jpg");
+  min-width: 300px;
+  min-height: 300px; }
+
+.minWidth {
+  min-width: 250px; }
+
+.minWidthBox {
+  min-width: 250px;
+  min-height: 500px; }
+
+.popoverBookImage {
+  height: 100%;
+  width: 100%;
+  max-width: 300px;
+  max-height: 350px; }
+
+.popoverBook {
+  max-width: 500px;
+  max-height: 400px;
+  overflow-x: hidden; }
+
+.tableRow {
+  cursor: pointer; }
+
+.containerLgHome {
+  min-height: 500px; }
+
+.containerLgHomeInner {
+  min-height: 300px; }
+
+/*# sourceMappingURL=home.css.map */
