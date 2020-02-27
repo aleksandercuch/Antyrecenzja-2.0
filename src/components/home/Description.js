@@ -44,7 +44,7 @@ class Description extends Component {
                     Cześć, mam na imię Aleksander.
                     Z wykształcenia jestem inżynierem oprogramowania, a w wolnym czasie oddaję się pasji, jaką jest pisanie.
                     Tworzę opowiadania i powieść w klimatach fantastycznych, więc jeżeli lubisz ten gatunek, to gorąco zapraszam do zapoznania się z moją twórczością. Najbardziej cenię sobie szczerą, zasłużoną krytykę ;)
-                    Jeśli chcesz dowiedzieć się więcej o mnie i o forum, zapraszam <Link to="/" style={{ textDecoration: 'none', color: "blue" }}>tutaj</Link>.
+                    Jeśli chcesz dowiedzieć się więcej o mnie i o forum, zapraszam <Link to="/omnie" style={{ textDecoration: 'none', color: "blue" }}>tutaj</Link>.
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
