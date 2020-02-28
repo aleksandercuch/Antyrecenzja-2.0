@@ -46,7 +46,6 @@ class Posts extends Component {
               <img className="postImg" src="https://cdn.pixabay.com/photo/2018/01/19/07/58/shaking-hands-3091908_960_720.jpg" alt="image error" />
             </Grid>
           </Grid>
-         <hr />
           <Divider variant="fullWidth" />
         </Paper>
       </>

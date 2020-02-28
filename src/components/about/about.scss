@@ -4,9 +4,12 @@
 
 .photoPanelImage {
     max-width: 250px;
-    width: auto;
+    width: 100%;
+    height: auto;
 }
 
-img {
+.logoImage {
     margin-top: 20px;
+    width: 100%;
+    height: auto;
 }

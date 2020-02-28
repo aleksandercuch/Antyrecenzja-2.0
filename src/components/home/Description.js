@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import { Link } from "react-router-dom";
+import Link from "@material-ui/core/Link";
 import './home.scss';
 import Divider from '@material-ui/core/Divider';
 import FacebookIcon from '@material-ui/icons/Facebook';
@@ -18,6 +18,7 @@ class Description extends Component {
   render() {
     return (
       <>
+      <Paper className="padding">
         <Grid
           container
           direction="row"
@@ -26,7 +27,6 @@ class Description extends Component {
           spacing={3}
         >
           <Grid item xs={12}>
-            <Paper className="paddingClass">
               <Grid
                 container
                 direction="row"
@@ -38,6 +38,9 @@ class Description extends Component {
                   <Typography variant="h5" align="center">
                     Krótko o mnie
                   </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                  <Divider />
                 </Grid>
                 <Grid item xs={12}>
                   <Typography variant="subtitle1" align="center">
@@ -56,11 +59,11 @@ class Description extends Component {
                     direction="row"
                     justify="center"
                     alignItems="center"
-                    spacing={10}
+                    spacing={2}
                   >
-                    <Grid item>
-                      <a href="https://www.facebook.com/Antyrecenzja/?modal=admin_todo_tour">
-                        <Button style={{ 'textDecoration': 'none', 'textTransform': 'none' }}>
+                    <Grid item xs={4}>
+                      <Link href="https://www.facebook.com/Antyrecenzja/?modal=admin_todo_tour" style={{ 'textDecoration': 'none' }}>
+                        <Button style={{ 'textTransform': 'none' }}>
                           <Grid
                             container
                             direction="column"
@@ -77,11 +80,11 @@ class Description extends Component {
                             </Grid>
                           </Grid>
                         </Button>
-                      </a>
+                      </Link>
                     </Grid>
-                    <Grid item>
-                      <a href="https://www.instagram.com/aleksandercuch/">
-                        <Button style={{ 'textDecoration': 'none', 'textTransform': 'none' }}>
+                    <Grid item xs={4}>
+                      <Link href="https://www.instagram.com/aleksandercuch/" style={{ 'textDecoration': 'none' }}>
+                        <Button style={{ 'textTransform': 'none' }}>
                           <Grid
                             container
                             direction="column"
@@ -98,11 +101,11 @@ class Description extends Component {
                             </Grid>
                           </Grid>
                         </Button>
-                      </a>
+                      </Link>
                     </Grid>
-                    <Grid item>
-                      <a href="https://www.linkedin.com/in/aleksander-cuch-161118180/">
-                        <Button style={{ 'textDecoration': 'none', 'textTransform': 'none' }}>
+                    <Grid item xs={4}>
+                      <Link href="https://www.linkedin.com/in/aleksander-cuch-161118180/" style={{ 'textDecoration': 'none' }}>
+                        <Button style={{ 'textTransform': 'none' }}>
                           <Grid
                             container
                             direction="column"
@@ -119,14 +122,15 @@ class Description extends Component {
                             </Grid>
                           </Grid>
                         </Button>
-                      </a>
+                      </Link>
                     </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Paper>
+          
           </Grid>
         </Grid>
+        </Paper>
       </>
     );
   }

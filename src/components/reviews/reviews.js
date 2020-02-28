@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Description from "../home/Description"
 import AllReviews from "./allReviews"
+import NextToRead from "./nextToRead"
 import './reviews.scss';
 
 class Reviews extends Component {
@@ -26,8 +27,8 @@ class Reviews extends Component {
                 justify="center"
                 alignItems="center"
               >
-                <Grid item>
-                  <img src="https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/87851774_197975394895259_2913424394464264192_n.png?_nc_cat=108&_nc_sid=dd9801&_nc_ohc=jemzy1ynKVAAX9cARCE&_nc_ht=scontent-waw1-1.xx&oh=78d0470e3256f684b7d0c21392a7dcf0&oe=5EBD84CA" alt="logo error" />
+                <Grid item xs={12}>
+                  <img className="logoImage" src="https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/87851774_197975394895259_2913424394464264192_n.png?_nc_cat=108&_nc_sid=dd9801&_nc_ohc=jemzy1ynKVAAX9cARCE&_nc_ht=scontent-waw1-1.xx&oh=78d0470e3256f684b7d0c21392a7dcf0&oe=5EBD84CA" alt="logo error" />
                 </Grid>
               </Grid>
             </Grid>
@@ -35,7 +36,20 @@ class Reviews extends Component {
               <AllReviews />
             </Grid>
             <Grid item xs={3}>
-              <Description />
+            <Grid
+                container
+                direction="column"
+                justify="center"
+                alignItems="center"
+                spacing={8}
+              >
+                <Grid item xs={12}>
+                  <Description />
+                </Grid>
+                <Grid item xs={12}>
+                  <NextToRead />
+                </Grid>
+              </Grid>
             </Grid>
           </Grid>
         </Box>

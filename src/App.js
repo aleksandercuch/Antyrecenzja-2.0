@@ -7,6 +7,7 @@ import AboutMe from "./components/about/aboutMe"
 import Stories from "./components/stories/stories"
 import Reviews from "./components/reviews/reviews"
 import CssBaseline from "@material-ui/core/CssBaseline";
+import TextTemplate from "./components/Reusable/TextTemplate"
 import './App.scss';
 
 class App extends Component {
@@ -19,7 +20,8 @@ class App extends Component {
           <Route exact path='/' component={Home} /> 
           <Route exact path='/omnie' component={AboutMe} />
           <Route exact path='/teksty' component={Stories} />  
-          <Route exact path='/recenzje' component={Reviews} />  
+          <Route exact path='/recenzje' component={Reviews} /> 
+          <Route exact path='/tekst' component={TextTemplate} />  
           <Footer /> 
         </BrowserRouter>
       </div>

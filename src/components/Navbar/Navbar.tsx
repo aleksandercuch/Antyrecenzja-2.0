@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import PersonIcon from '@material-ui/icons/Person';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './Navbar.scss';
 
 class Navbar extends Component {
@@ -22,14 +22,14 @@ class Navbar extends Component {
               alignItems="center"
             >
               <Grid item>
-                <Link to="/">
-                  <Button style={{ 'textDecoration': 'none', 'textTransform': 'none' }}>
+                <NavLink to="/" style={{ 'textDecoration': 'none' }}>
+                  <Button style={{ 'textTransform': 'none' }}>
                     <Typography variant="h5">
                       Antyrecenzja
                     </Typography>
                     <img src="https://cdn.pixabay.com/photo/2016/10/18/19/46/vintage-1751222_960_720.png" alt="image error" height="42" width="42" />
                   </Button>
-                </Link>
+                </NavLink>
               </Grid>
               <Grid item>
                 <Grid
@@ -40,45 +40,45 @@ class Navbar extends Component {
                   spacing={3}
                 >
                   <Grid item>
-                    <Link to="/">
-                      <Button style={{ 'textDecoration': 'none' }}>
+                    <NavLink to="/" style={{ 'textDecoration': 'none' }}>
+                      <Button style={{ 'textTransform': 'none' }}>
                         <Typography variant="h6">
                           Strona główna
                         </Typography>
                       </Button>
-                    </Link>
+                    </NavLink>
                   </Grid>
                   <Grid item>
-                    <Link to="/omnie">
-                      <Button style={{ 'textDecoration': 'none' }}>
+                    <NavLink to="/omnie" style={{ 'textDecoration': 'none' }}>
+                      <Button style={{ 'textTransform': 'none' }}>
                         <Typography variant="h6">
                           O mnie
                         </Typography>
                       </Button>
-                    </Link>
+                    </NavLink>
                   </Grid>
                   <Grid item>
-                    <Link to="/teksty">
-                      <Button style={{ 'textDecoration': 'none' }}>
+                    <NavLink to="/teksty" style={{ 'textDecoration': 'none' }}>
+                      <Button style={{ 'textTransform': 'none' }}>
                         <Typography variant="h6">
                           Teksty
                         </Typography>
                       </Button>
-                    </Link>
+                    </NavLink>
                   </Grid>
                   <Grid item>
-                    <Link to="/recenzje">
-                      <Button style={{ 'textDecoration': 'none' }}>
+                    <NavLink to="/recenzje" style={{ 'textDecoration': 'none' }}>
+                      <Button style={{ 'textTransform': 'none' }}>
                         <Typography variant="h6">
                           Recenzje
                         </Typography>
                       </Button>
-                    </Link>
+                    </NavLink>
                   </Grid>
                 </Grid>
               </Grid>
               <Grid item>
-              <Grid
+                <Grid
                   container
                   direction="row"
                   justify="center"
@@ -86,24 +86,24 @@ class Navbar extends Component {
                   spacing={1}
                 >
                   <Grid item>
-                    <Link to="/rejestracja">
-                      <Button style={{ 'textDecoration': 'none', 'textTransform': 'none' }}>
+                    <NavLink to="/rejestracja" style={{ 'textDecoration': 'none' }}>
+                      <Button style={{ 'textTransform': 'none' }}>
                         <PersonIcon />
                         <Typography variant="h6">
                           Rejestracja
                         </Typography>
                       </Button>
-                    </Link>
+                    </NavLink>
                   </Grid>
                   <Grid item>
-                    <Link to="/logowanie">
-                      <Button style={{ 'textDecoration': 'none', 'textTransform': 'none' }}>
+                    <NavLink to="/logowanie" style={{ 'textDecoration': 'none' }}>
+                      <Button style={{ 'textTransform': 'none' }}>
                         <ExitToAppIcon />
                         <Typography variant="h6">
                           Logowanie
                         </Typography>
                       </Button>
-                    </Link>
+                    </NavLink>
                   </Grid>
                 </Grid>
               </Grid>

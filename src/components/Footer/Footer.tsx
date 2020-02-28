@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import Link from '@material-ui/core/Link';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import FacebookIcon from '@material-ui/icons/Facebook';
@@ -33,8 +34,8 @@ class Footer extends Component {
                       spacing={10}
                     >
                       <Grid item>
-                        <a href="https://www.facebook.com/Antyrecenzja/?modal=admin_todo_tour">
-                          <Button style={{ 'textDecoration': 'none', 'textTransform': 'none' }}>
+                        <Link href="https://www.facebook.com/Antyrecenzja/?modal=admin_todo_tour" style={{ 'textDecoration': 'none' }}>
+                          <Button style={{ 'textTransform': 'none' }}>
                             <Grid
                               container
                               direction="column"
@@ -51,11 +52,11 @@ class Footer extends Component {
                               </Grid>
                             </Grid>
                           </Button>
-                        </a>
+                        </Link>
                       </Grid>
                       <Grid item>
-                        <a href="https://www.instagram.com/aleksandercuch/">
-                          <Button style={{ 'textDecoration': 'none', 'textTransform': 'none' }}>
+                        <Link href="https://www.instagram.com/aleksandercuch/" style={{ 'textDecoration': 'none' }}>
+                          <Button style={{ 'textTransform': 'none' }}>
                             <Grid
                               container
                               direction="column"
@@ -72,11 +73,11 @@ class Footer extends Component {
                               </Grid>
                             </Grid>
                           </Button>
-                        </a>
+                        </Link>
                       </Grid>
                       <Grid item>
-                        <a href="https://www.linkedin.com/in/aleksander-cuch-161118180/">
-                          <Button style={{ 'textDecoration': 'none', 'textTransform': 'none' }}>
+                        <Link href="https://www.linkedin.com/in/aleksander-cuch-161118180/" style={{ 'textDecoration': 'none' }}>
+                          <Button style={{ 'textTransform': 'none' }}>
                             <Grid
                               container
                               direction="column"
@@ -93,7 +94,7 @@ class Footer extends Component {
                               </Grid>
                             </Grid>
                           </Button>
-                        </a>
+                        </Link>
                       </Grid>
                     </Grid>
                   </Box>

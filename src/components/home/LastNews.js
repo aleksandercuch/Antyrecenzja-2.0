@@ -14,7 +14,7 @@ class Posts extends Component {
   render() {
     return (
       <>
-        <Paper className="paddingClass">
+        <Paper className="padding">
           <Grid
             container
             direction="row"
@@ -51,10 +51,10 @@ class Posts extends Component {
                         Recenzja
                       </Typography>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                       <img src="https://ecsmedia.pl/c/krolowie-przekleci-tom-1-b-iext43259211.jpg" className="lastImages" alt="no image" />
                     </Grid>
-                    <Grid item >
+                    <Grid item xs={12}>
                       <Button variant="contained">Czytaj</Button>
                     </Grid>
                   </Grid>
@@ -72,10 +72,10 @@ class Posts extends Component {
                         Ostatni Zwiastun - rozdział 3
                       </Typography>
                     </Grid>
-                    <Grid item>
+                    <Grid item xs={12}>
                       <img src="https://cdn.pixabay.com/photo/2019/07/21/13/11/portrait-4352745_960_720.jpg" className="lastImages" alt="no image" />
                     </Grid>
-                    <Grid item >
+                    <Grid item xs={12}>
                       <Button variant="contained">Czytaj</Button>
                     </Grid>
                   </Grid>
