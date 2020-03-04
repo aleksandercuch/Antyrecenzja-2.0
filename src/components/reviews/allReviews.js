@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import './reviews.scss';
+import { Link } from 'react-router-dom';
 
 class AllReviews extends Component {
 
@@ -51,7 +52,9 @@ class AllReviews extends Component {
                     spacing={1}
                   >
                     <Grid item xs={5} >
-                      <img style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .05)', padding: '2em' }} className="reviewImage" src="https://ecsmedia.pl/c/komornik-tom-1-w-iext43267429.jpg" alt="error" />
+                      <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
+                        <img style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .05)', padding: '2em' }} className="reviewImage" src="https://ecsmedia.pl/c/komornik-tom-1-w-iext43267429.jpg" alt="error" />
+                      </Link>
                     </Grid>
                     <Grid item xs={7}>
                       <Grid
@@ -68,7 +71,9 @@ class AllReviews extends Component {
                         </Grid>
                         <Grid item xs={8}>
                           <Box mr={10}>
-                            <Button variant="contained">Czytaj</Button>
+                            <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
+                              <Button variant="contained">Czytaj</Button>
+                            </Link>
                           </Box>
                         </Grid>
                       </Grid>

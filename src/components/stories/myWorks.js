@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from "@material-ui/core/Divider";
 import './stories.scss';
+import { Link } from "react-router-dom";
 
 class MyWorks extends Component {
 
@@ -121,9 +122,9 @@ class MyWorks extends Component {
 																		</Typography>
                                   </Grid>
                                   <Grid item xs={3}>
-                                    <Button variant="contained">
-                                      Czytaj
-																		</Button>
+                                    <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
+                                      <Button variant="contained">Czytaj</Button>
+                                    </Link>
                                   </Grid>
                                 </Grid>
                               </Grid>
@@ -196,9 +197,9 @@ class MyWorks extends Component {
                                 spacing={1}
                               >
                                 <Grid item xs={12}>
-                                  <Button variant="contained">
-                                    Czytaj
-																	</Button>
+                                  <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
+                                    <Button variant="contained">Czytaj</Button>
+                                  </Link>
                                 </Grid>
                               </Grid>
                             </Grid>

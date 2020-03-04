@@ -5,15 +5,42 @@ import Box from "@material-ui/core/Box";
 import { connect } from 'react-redux';
 import './home.scss';
 import { compose } from "redux";
-import { firestoreConnect } from "react-redux-firebase";
 import LastNews from "./LastNews"
 import Description from "./Description"
 import Carousel from "./Carousel"
 import Posts from "./Posts"
+import CircularProgress from "@material-ui/core/CircularProgress";
+import firebase from "../../config/firebaseConfig";
+
 
 class Home extends Component {
 
-  state = {};
+  state = {
+    filteredPosts: [],
+    loading: true,
+    allPosts: [],
+    last: null,
+  };
+
+  componentDidMount() {
+    firebase.firestore().collection('posts')
+      .orderBy("date", "desc")
+      .get().then(posts => {
+        let filteredPosts = [];
+        let last = posts.docs[posts.docs.length - 1];
+        posts.forEach(post => {
+          let tempPost = post.data();
+          tempPost.id = post.id;
+          filteredPosts.push(tempPost)
+        });
+        this.setState({
+          filteredPosts: filteredPosts,
+          loading: false,
+          allPosts: this.state.allPosts.concat(filteredPosts),
+          last: last
+        })
+      })
+  }
 
   render() {
     return (
@@ -37,7 +64,25 @@ class Home extends Component {
               <Description />
             </Grid>
             <Grid item xs={9}>
-              <Posts />
+              <>
+                {this.state.loading ? (
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    spacing={1}
+                  >
+                    <Box p={2}>
+                      <CircularProgress />
+                    </Box>
+                  </Grid>
+                ) : (
+                    <Posts
+                      posts={this.props.posts}
+                    />
+                  )}
+              </>
             </Grid>
           </Grid>
         </Box>
@@ -48,11 +93,12 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.firebase.auth.isEmpty
+    auth: state.firebase.auth
   }
 };
 
+
 export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([])
+  connect(mapStateToProps)
 )(Home);
+

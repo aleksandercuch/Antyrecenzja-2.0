@@ -10,8 +10,6 @@ import {signUp} from "../../store/actions/authActions";
 import {Redirect} from "react-router-dom";
 import './auth.scss'
 import Typography from "@material-ui/core/Typography";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListSubheader from "@material-ui/core/ListSubheader";
 
 class Register extends Component {
   state = {
@@ -19,10 +17,6 @@ class Register extends Component {
     passwordRepeat: '',
     email: '',
     nick: '',
-    birthDay: '',
-    birthMonth: '',
-    birthYear: '',
-    gender: ''
   };
 
   handleChange = (event) => {
@@ -44,30 +38,6 @@ class Register extends Component {
 
   componentWillUnmount() {
     ValidatorForm.removeValidationRule('passwordMatch');
-  }
-
-  createDays() {
-    let days = [];
-    for (let i = 1; i <= 31; i++) {
-      days.push(<MenuItem value={i} key={i}>{i}</MenuItem>)
-    }
-    return days;
-  }
-
-  createMonths() {
-    let months = [];
-    for (let i = 1; i <= 12; i++) {
-      months.push(<MenuItem value={i} key={i}>{i}</MenuItem>)
-    }
-    return months;
-  }
-
-  createYears() {
-    let years = [];
-    for (let i = new Date().getFullYear(); i >= 1900 ; i--) {
-      years.push(<MenuItem value={i} key={i}>{i}</MenuItem>)
-    }
-    return years;
   }
 
   render() {
@@ -102,13 +72,13 @@ class Register extends Component {
                       spacing={1}
                     >
                       <Grid item xs={12}>
-                        <Typography variant="h3" align="center" component="h3">
-                          Register
+                        <Typography variant="h4" align="center" component="h3">
+                          Rejestracja
                         </Typography>
                       </Grid>
                       <Grid item xs={12}>
                         <TextValidator
-                          label="Nick"
+                          label="nazwa użytkownika"
                           onChange={this.handleChange}
                           name="nick"
                           fullWidth
@@ -120,7 +90,7 @@ class Register extends Component {
                       </Grid>
                       <Grid item xs={12}>
                         <TextValidator
-                          label="Email"
+                          label="e-mail"
                           onChange={this.handleChange}
                           name="email"
                           fullWidth
@@ -132,7 +102,7 @@ class Register extends Component {
                       </Grid>
                       <Grid item xs={12}>
                         <TextValidator
-                          label="Password"
+                          label="hasło"
                           onChange={this.handleChange}
                           name="password"
                           type="password"
@@ -145,7 +115,7 @@ class Register extends Component {
                       </Grid>
                       <Grid item xs={12}>
                         <TextValidator
-                          label="Repeat Password"
+                          label="powtórz hasło"
                           onChange={this.handleChange}
                           name="passwordRepeat"
                           type="password"
@@ -155,62 +125,6 @@ class Register extends Component {
                           errorMessages={['this field is required', 'passwords are not the same', 'password must contain at least one upper case letter', 'password must contain at least one lower case letter', 'password must contain at least one digit', 'password must be at least 8 long']}
                         >
                         </TextValidator>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Typography variant='body2' component='p'>
-                          Gender
-                        </Typography>
-                        <SelectValidator
-                          name="gender"
-                          value={this.state.gender}
-                          onChange={this.handleChange}
-                          validators={['required']}
-                          errorMessages={['this field is required']}
-                        >
-                          <MenuItem value='Male'>Male</MenuItem>
-                          <MenuItem value='Female'>Female</MenuItem>
-                          <MenuItem value='Other'>Other</MenuItem>
-                        </SelectValidator>
-                      </Grid>
-                      <Grid item xs={12}>
-                        <Box pt={2}>
-                          <Typography variant='body2' component='p'>
-                            Birth Date
-                          </Typography>
-                          <SelectValidator
-                            name="birthDay"
-                            value={this.state.birthDay}
-                            onChange={this.handleChange}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
-                            className='birthDateSelect'
-                          >
-                            <ListSubheader>Day</ListSubheader>
-                            {this.createDays()}
-                          </SelectValidator>
-                          <SelectValidator
-                            name="birthMonth"
-                            value={this.state.birthMonth}
-                            onChange={this.handleChange}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
-                            className='birthDateSelect'
-                          >
-                            <ListSubheader>Month</ListSubheader>
-                            {this.createMonths()}
-                          </SelectValidator>
-                          <SelectValidator
-                            name="birthYear"
-                            value={this.state.birthYear}
-                            onChange={this.handleChange}
-                            validators={['required']}
-                            errorMessages={['this field is required']}
-                            className='birthDateSelect'
-                          >
-                            <ListSubheader>Year</ListSubheader>
-                            {this.createYears()}
-                          </SelectValidator>
-                        </Box>
                       </Grid>
                       {
                         error && (
@@ -222,7 +136,7 @@ class Register extends Component {
                         )
                       }
                       <Box pt={2}>
-                        <Button type="submit" variant="contained" color="primary">Register</Button>
+                        <Button type="submit" variant="contained" >Zarejestruj się</Button>
                       </Box>
                     </Grid>
                   </ValidatorForm>

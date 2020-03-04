@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
 import './home.scss';
+import { Link } from 'react-router-dom'
 
 class Posts extends Component {
 
@@ -52,10 +53,14 @@ class Posts extends Component {
                       </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                      <img src="https://ecsmedia.pl/c/krolowie-przekleci-tom-1-b-iext43259211.jpg" className="lastImages" alt="no image" />
+                      <Link to="/tekst">
+                        <img src="https://ecsmedia.pl/c/krolowie-przekleci-tom-1-b-iext43259211.jpg" className="lastImages" alt="no image" />
+                      </Link>
                     </Grid>
                     <Grid item xs={12}>
-                      <Button variant="contained">Czytaj</Button>
+                      <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
+                        <Button variant="contained">Czytaj</Button>
+                      </Link>
                     </Grid>
                   </Grid>
                 </Grid>
@@ -73,11 +78,13 @@ class Posts extends Component {
                       </Typography>
                     </Grid>
                     <Grid item xs={12}>
-                      <img src="https://cdn.pixabay.com/photo/2019/07/21/13/11/portrait-4352745_960_720.jpg" className="lastImages" alt="no image" />
+                      <Link to="/tekst">
+                        <img src="https://cdn.pixabay.com/photo/2019/07/21/13/11/portrait-4352745_960_720.jpg" className="lastImages" alt="no image" />
+                      </Link>
                     </Grid>
-                    <Grid item xs={12}>
+                    <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
                       <Button variant="contained">Czytaj</Button>
-                    </Grid>
+                    </Link>
                   </Grid>
                 </Grid>
               </Grid>

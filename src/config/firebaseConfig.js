@@ -4,16 +4,16 @@ import 'firebase/auth'
 import 'firebase/storage';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyB-P3QWySDzILleTtrZGsYf_nAHc5e_ydM",
-    authDomain: "forgeit-100.firebaseapp.com",
-    databaseURL: "https://forgeit-100.firebaseio.com",
-    projectId: "forgeit-100",
-    storageBucket: "forgeit-100.appspot.com",
-    messagingSenderId: "386235534201",
-    appId: "1:386235534201:web:8592dcb76f52d296c3fda8"
-};
-
-firebase.initializeApp(firebaseConfig);
+    apiKey: "AIzaSyA6AtzweFx8E_greEB6vAlEHf1_DJKQr8s",
+    authDomain: "antyrecenzja-a7320.firebaseapp.com",
+    databaseURL: "https://antyrecenzja-a7320.firebaseio.com",
+    projectId: "antyrecenzja-a7320",
+    storageBucket: "antyrecenzja-a7320.appspot.com",
+    messagingSenderId: "767876128406",
+    appId: "1:767876128406:web:2f3ef3b93acbe2ffcfacb7",
+  };
+  
+  firebase.initializeApp(firebaseConfig);
 
 const storage = firebase.storage();
 

@@ -23,44 +23,6 @@ export const signOut = () => {
   }
 };
 
-export const changePassword = (credentials) => {
-  return (dispatch, getState, {getFirebase}) => {
-    const firebase = getFirebase();
-    const user = firebase.auth().currentUser;
-    const cred = firebase.auth.EmailAuthProvider.credential(user.email, credentials.oldPassword);
-    user.reauthenticateWithCredential(cred)
-      .then(() => {
-        firebase.auth().currentUser.updatePassword(credentials.newPassword)
-          .then(() => {
-            dispatch({type: 'PASSWORD_CHANGE_SUCCESS'});
-          }).catch(() => {
-          dispatch({type: 'PASSWORD_CHANGE_ERROR'});
-        });
-      }).catch(() => {
-      dispatch({type: 'PASSWORD_CHANGE_ERROR'});
-    });
-  }
-};
-
-export const changeEmail = (credentials) => {
-  return (dispatch, getState, {getFirebase}) => {
-    const firebase = getFirebase();
-    const user = firebase.auth().currentUser;
-    const cred = firebase.auth.EmailAuthProvider.credential(user.email, credentials.password);
-    user.reauthenticateWithCredential(cred)
-      .then(() => {
-        firebase.auth().currentUser.updateEmail(credentials.newEmail)
-          .then(() => {
-            dispatch({type: 'EMAIL_CHANGE_SUCCESS'});
-          }).catch(() => {
-          dispatch({type: 'EMAIL_CHANGE_ERROR'});
-        });
-      }).catch(() => {
-      dispatch({type: 'EMAIL_CHANGE_ERROR'});
-    });
-  }
-};
-
 export const signUp = (newUser) => {
   return (dispatch, getState, {getFirestore, getFirebase}) => {
     const firebase = getFirebase();
