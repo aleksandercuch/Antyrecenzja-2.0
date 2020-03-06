@@ -11,6 +11,7 @@ import TextTemplate from "./components/Reusable/TextTemplate"
 import Register from "./components/auth/Register"
 import SignIn from "./components/auth/SignIn"
 import LogOut from "./components/auth/LogOut"
+import UploadText from "./components/addText/UploadText"
 import './App.scss';
 
 class App extends Component {
@@ -24,10 +25,11 @@ class App extends Component {
           <Route exact path='/omnie' component={AboutMe} />
           <Route exact path='/teksty' component={Stories} />  
           <Route exact path='/recenzje' component={Reviews} /> 
-          <Route exact path='/tekst' component={TextTemplate} />  
+          <Route exact path='/tekst/:id' component={TextTemplate} />  
           <Route exact path='/rejestracja' component={Register} /> 
           <Route exact path='/logowanie' component={SignIn} /> 
           <Route exact path='/wylogowywanie' component={LogOut} /> 
+          <Route exact path='/add' component={UploadText} /> 
           <Footer /> 
         </BrowserRouter>
       </div>

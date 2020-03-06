@@ -13,6 +13,8 @@ class Posts extends Component {
   state = {};
 
   render() {
+    let chapters = this.props.chapters;
+    let reviews = this.props.reviews;
     return (
       <>
         <Paper className="padding">
@@ -40,52 +42,86 @@ class Posts extends Component {
                   <Divider variant="fullWidth" />
                 </Grid>
                 <Grid item xs={6} style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .2)', padding: '0.5em' }}>
-                  <Grid
-                    container
-                    direction="column"
-                    justify="center"
-                    alignItems="center"
-                    spacing={2}
-                  >
-                    <Grid item>
-                      <Typography align="center" variant="h6">
-                        Recenzja
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Link to="/tekst">
-                        <img src="https://ecsmedia.pl/c/krolowie-przekleci-tom-1-b-iext43259211.jpg" className="lastImages" alt="no image" />
-                      </Link>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
-                        <Button variant="contained">Czytaj</Button>
-                      </Link>
-                    </Grid>
-                  </Grid>
+                  {reviews.map(review => {
+                    return (
+                      <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                        spacing={2}
+                      >
+                        <Grid item>
+                          <Typography align="center" variant="h6">
+                            Recenzja
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Link to={{
+                            pathname: `/tekst/${review.id}`,
+                            state: {
+                              collection: "reviews",
+                              id: `${review.id}`
+                            }
+                          }} >
+                            <img src={review.photo} className="lastImages" alt="no image" />
+                          </Link>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Link to={{
+                            pathname: `/tekst/${review.id}`,
+                            state: {
+                              collection: "reviews",
+                              id: `${review.id}`
+                            }
+                          }} >
+                            <Button variant="contained">Czytaj</Button>
+                          </Link>
+                        </Grid>
+                      </Grid>
+                    )
+                  })}
                 </Grid>
                 <Grid item xs={6} style={{ padding: '0.5em' }}>
-                  <Grid
-                    container
-                    direction="column"
-                    justify="center"
-                    alignItems="center"
-                    spacing={2}
-                  >
-                    <Grid item>
-                      <Typography align="center" variant="h6">
-                        Ostatni Zwiastun - rozdział 3
-                      </Typography>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Link to="/tekst">
-                        <img src="https://cdn.pixabay.com/photo/2019/07/21/13/11/portrait-4352745_960_720.jpg" className="lastImages" alt="no image" />
-                      </Link>
-                    </Grid>
-                    <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
-                      <Button variant="contained">Czytaj</Button>
-                    </Link>
-                  </Grid>
+                  {chapters.map(chapter => {
+                    return (
+                      <Grid
+                        container
+                        direction="column"
+                        justify="center"
+                        alignItems="center"
+                        spacing={2}
+                      >
+                        <Grid item>
+                          <Typography align="center" variant="h6">
+                            Ostatni Zwiastun - rozdział {chapter.number}
+                          </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                          <Link to={{
+                            pathname: `/tekst/${chapter.id}`,
+                            state: {
+                              collection: "chapters",
+                              id: `${chapter.id}`
+                            }
+                          }} >
+                            <img src="https://cdn.pixabay.com/photo/2019/07/21/13/11/portrait-4352745_960_720.jpg" className="lastImages" alt="no image" />
+                          </Link>
+                        </Grid>
+                        <Link to={{
+                          pathname: `/tekst/${chapter.id}`,
+                          state: {
+                            collection: "chapters"
+                          }
+                        }}
+                          params={{ testvalue: "hello" }}
+                          style={{ 'textDecoration': 'none' }}
+                        >
+                          <Button variant="contained">Czytaj</Button>
+                        </Link>
+                      </Grid>
+                    )
+                  })}
                 </Grid>
               </Grid>
             </Grid>

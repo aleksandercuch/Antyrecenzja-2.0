@@ -17,6 +17,8 @@ class MyWorks extends Component {
   state = {};
 
   render() {
+    let chapters = this.props.chapters;
+    let others = this.props.others;
     return (
       <>
         <Paper className="padding">
@@ -105,29 +107,41 @@ class MyWorks extends Component {
                               justify="flex-start"
                               alignItems="flex-start"
                             >
-                              <Grid item xs={12}>
-                                <Grid
-                                  container
-                                  direction="row"
-                                  justify="flex-start"
-                                  alignItems="flex-start"
-                                  spacing={1}
-                                >
+                              {chapters.map(chapter => {
+                                return (
                                   <Grid item xs={12}>
-                                    <Divider />
+                                    <Grid
+                                      container
+                                      direction="row"
+                                      justify="flex-start"
+                                      alignItems="flex-start"
+                                      spacing={1}
+                                    >
+                                      <Grid item xs={12}>
+                                        <Divider />
+                                      </Grid>
+                                      <Grid item xs={9}>
+                                        <Typography variant="h6">
+                                          Rozdział {chapter.number} - {chapter.title}
+                                        </Typography>
+                                      </Grid>
+                                      <Grid item xs={3}>
+                                        <Link to={{
+                                          pathname: `/tekst/${chapter.id}`,
+                                          state: {
+                                            collection: "chapters",
+                                            id: `${chapter.id}`
+                                          }
+                                        }}
+                                          style={{ 'textDecoration': 'none' }}
+                                        >
+                                          <Button variant="contained">Czytaj</Button>
+                                        </Link>
+                                      </Grid>
+                                    </Grid>
                                   </Grid>
-                                  <Grid item xs={9}>
-                                    <Typography variant="h6">
-                                      Rozdział 1 - Nowa Nadzieja
-																		</Typography>
-                                  </Grid>
-                                  <Grid item xs={3}>
-                                    <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
-                                      <Button variant="contained">Czytaj</Button>
-                                    </Link>
-                                  </Grid>
-                                </Grid>
-                              </Grid>
+                                )
+                              })}
                             </Grid>
                           </ExpansionPanelDetails>
                         </ExpansionPanel>
@@ -153,62 +167,71 @@ class MyWorks extends Component {
                     Inne
 								</Typography>
                 </Grid>
-                <Grid item xs={12}>
-                  <ExpansionPanel>
-                    <ExpansionPanelSummary
-                      expandIcon={<ExpandMoreIcon />}
-                      aria-controls="panel1a-content"
-                      id="panel1a-header"
-                    >
-                      <Typography variant="h6">Opowiadanie - Żarooki</Typography>
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
-                      <Grid
-                        container
-                        direction="row"
-                        justify="flex-start"
-                        alignItems="flex-start"
-                      >
-                        <Grid item xs={12}>
+                {others.map(story => {
+                  return (
+                    <Grid item xs={12}>
+                      <ExpansionPanel>
+                        <ExpansionPanelSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel1a-content"
+                          id="panel1a-header"
+                        >
+                          <Typography variant="h6">{story.title}</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
                           <Grid
                             container
                             direction="row"
-                            justify="center"
-                            alignItems="center"
-                            spacing={1}
+                            justify="flex-start"
+                            alignItems="flex-start"
                           >
-                            <Grid item xs={12}>
-                              <Divider />
-                            </Grid>
-                            <Grid item xs={10}>
-                              <Typography variant="subtitle1">
-                                Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki
-                                Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki
-                                Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki
-                                Opowiadanie - Żarooki Opowiadanie - Żarooki Opowiadanie - Żarooki
-															</Typography>
-                            </Grid>
                             <Grid item xs={12}>
                               <Grid
                                 container
-                                direction="column"
+                                direction="row"
                                 justify="center"
                                 alignItems="center"
                                 spacing={1}
                               >
                                 <Grid item xs={12}>
-                                  <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
-                                    <Button variant="contained">Czytaj</Button>
-                                  </Link>
+                                  <Divider />
+                                </Grid>
+                                <Grid item xs={10}>
+                                  <Typography variant="subtitle1">
+                                    {story.description}
+                                  </Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                  <Grid
+                                    container
+                                    direction="column"
+                                    justify="center"
+                                    alignItems="center"
+                                    spacing={1}
+                                  >
+                                    <Grid item xs={12}>
+                                      <Link to={{
+                                        pathname: `/tekst/${story.id}`,
+                                        state: {
+                                          collection: "others",
+                                          id: `${story.id}`
+                                        }
+                                      }}
+                                        style={{ 'textDecoration': 'none' }}
+                                      >
+                                        <Button variant="contained">Czytaj</Button>
+                                      </Link>
+                                    </Grid>
+                                  </Grid>
                                 </Grid>
                               </Grid>
                             </Grid>
                           </Grid>
-                        </Grid>
-                      </Grid>
-                    </ExpansionPanelDetails>
-                  </ExpansionPanel>
-                </Grid>
+                        </ExpansionPanelDetails>
+                      </ExpansionPanel>
+                    </Grid>
+                  )
+                })}
               </Grid>
             </Grid>
           </Grid>

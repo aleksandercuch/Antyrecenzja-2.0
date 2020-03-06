@@ -9,6 +9,7 @@ import './reviews.scss';
 class NextToRead extends Component {
 
   render() {
+    let toRead = this.props.nextToRead;
     return (
       <>
         <Paper>
@@ -29,19 +30,30 @@ class NextToRead extends Component {
                 <Divider />
               </Typography>
             </Grid>
-            <Grid item xs={12}>
-              <Grid
-                container
-                direction="column"
-                justify="center"
-                alignItems="center"
-                spacing={3}
-              >
-                <Grid item xs={12}>
-                  <img className="reviewImage" src="https://ecsmedia.pl/c/komornik-tom-1-w-iext43267429.jpg" alt="error" />
-                </Grid>
-              </Grid>
-            </Grid>
+            {toRead.map(item => {
+              return (
+                <>
+                  <Grid item xs={12}>
+                    <Grid
+                      container
+                      direction="column"
+                      justify="center"
+                      alignItems="center"
+                      spacing={3}
+                    >
+                      <Grid item xs={12}>
+                        <img className="reviewImage" src={item.photo} alt="error" />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography variant="h5">
+                      <Divider />
+                    </Typography>
+                  </Grid>
+                </>
+              )
+            })}
           </Grid>
         </Paper>
       </>

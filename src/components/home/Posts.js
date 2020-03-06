@@ -5,7 +5,8 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 class Posts extends Component {
 
@@ -13,11 +14,18 @@ class Posts extends Component {
     let posts = this.props.posts;
     return (
       <>
-        {posts && Object.keys(posts).map(key => {
-          let post = posts[key];
+        {posts.map(post => {
           return (
             <Paper className="padding">
-              <Link to="/tekst" style={{ 'textDecoration': 'none' }}>
+              <Link to={{
+                pathname: `/tekst/${post.id}`,
+                state: {
+                  collection: "posts",
+                  id: `${post.id}`
+                }
+              }}
+                style={{ 'textDecoration': 'none' }}
+              >
                 <Grid
                   container
                   direction="row"
@@ -33,13 +41,13 @@ class Posts extends Component {
                       spacing={2}
                     >
                       <Grid item>
-                        <Typography style={{ 'color': 'black' }} variant="h3">Każdy zasługuje na szacunek - co o tym sądzę? </Typography>
+                        <Typography style={{ 'color': 'black' }} variant="h3">{post.title} </Typography>
                       </Grid>
                       <Grid item>
-                        <Typography style={{ 'color': 'black' }} variant="caption">Sept. 16, 2019, 1:11 p.m.</Typography>
+                        <Typography style={{ 'color': 'black' }} variant="caption">{moment(post.date.toMillis()).format('LL')}</Typography>
                       </Grid>
                       <Grid item>
-                        <Typography variant="h5" style={{ color: 'rgb(105,105,105)' }}>Ostatnie przemyślenia na temat naszych realiów doprowadziły mnie do pewnych wniosków i postanowiłem się nimi z Wami podzielić: nie każdy zasługuje na szacunek. Zanim ocenicie mnie jako jakiegoś odszczepieńca i dziwaka, pozwólcie, że rozwinę swoją myśl...</Typography>
+                        <Typography variant="h5" style={{ color: 'rgb(105,105,105)' }}>{post.intro}</Typography>
                       </Grid>
                       <Grid item>
                         <Typography style={{ 'color': 'black' }} variant="body1">by Aleksander</Typography>
@@ -47,7 +55,7 @@ class Posts extends Component {
                     </Grid>
                   </Grid>
                   <Grid item xs={7}>
-                    <img className="postImg" src="https://cdn.pixabay.com/photo/2018/01/19/07/58/shaking-hands-3091908_960_720.jpg" alt="image error" />
+                    <img className="postImg" src={post.photo} alt="image error" />
                   </Grid>
                 </Grid>
                 <Divider variant="fullWidth" />

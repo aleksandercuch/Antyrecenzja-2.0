@@ -1,0 +1,23 @@
+$zIndex: 999;
+
+.ck-toolbar {
+  position: sticky !important;
+  position: -webkit-sticky !important;
+  top: 0 !important;
+}
+
+.ck-editor__editable_inline {
+  min-height: 400px;
+}
+
+.errorMessage {
+  color: red;
+}
+
+.descriptionContainerError {
+  border: 2px solid red;
+}
+
+.formControl {
+  width: 360;
+}

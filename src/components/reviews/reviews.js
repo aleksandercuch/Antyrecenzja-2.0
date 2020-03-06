@@ -7,8 +7,52 @@ import AllReviews from "./allReviews"
 import NextToRead from "./nextToRead"
 import './reviews.scss';
 import AntyrecenzjaImage from "../Reusable/AntyrecenzjaImage"
+import { connect } from 'react-redux';
+import { compose } from "redux";
+import firebase from "../../config/firebaseConfig";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 class Reviews extends Component {
+
+  state = {
+    nextToRead: [],
+    filteredItems: [],
+    loading: true,
+    allItems: [],
+    last: null,
+  };
+
+  componentDidMount() {
+    firebase.firestore().collection('reviews')
+      .orderBy("date", "desc")
+      .get().then(items => {
+        let filteredItems = [];
+        let last = items.docs[items.docs.length - 1];
+        items.forEach(item => {
+          let tempItem = item.data();
+          tempItem.id = item.id;
+          filteredItems.push(tempItem)
+        });
+        firebase.firestore().collection('nextToRead')
+          .orderBy("date", "desc")
+          .get().then(items => {
+            let nextToRead = [];
+            let last = items.docs[items.docs.length - 1];
+            items.forEach(item => {
+              let tempItem = item.data();
+              tempItem.id = item.id;
+              nextToRead.push(tempItem)
+            });
+            this.setState({
+              nextToRead: nextToRead,
+              filteredItems: filteredItems,
+              loading: false,
+              allItems: this.state.allItems.concat(filteredItems),
+              last: last
+            })
+          })
+      })
+  }
 
   render() {
     return (
@@ -34,10 +78,28 @@ class Reviews extends Component {
               </Grid>
             </Grid>
             <Grid item xs={6}>
-              <AllReviews />
+              <>
+                {this.state.loading ? (
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    spacing={1}
+                  >
+                    <Box p={2}>
+                      <CircularProgress />
+                    </Box>
+                  </Grid>
+                ) : (
+                    <AllReviews
+                      reviews={this.state.allItems}
+                    />
+                  )}
+              </>
             </Grid>
             <Grid item xs={3}>
-            <Grid
+              <Grid
                 container
                 direction="column"
                 justify="center"
@@ -48,7 +110,25 @@ class Reviews extends Component {
                   <Description />
                 </Grid>
                 <Grid item xs={12}>
-                  <NextToRead />
+                  <>
+                    {this.state.loading ? (
+                      <Grid
+                        container
+                        direction="row"
+                        justify="center"
+                        alignItems="center"
+                        spacing={1}
+                      >
+                        <Box p={2}>
+                          <CircularProgress />
+                        </Box>
+                      </Grid>
+                    ) : (
+                        <NextToRead
+                          nextToRead={this.state.nextToRead}
+                        />
+                      )}
+                  </>
                 </Grid>
               </Grid>
             </Grid>
@@ -59,4 +139,13 @@ class Reviews extends Component {
   }
 }
 
-export default Reviews;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth
+  }
+};
+
+
+export default compose(
+  connect(mapStateToProps)
+)(Reviews);

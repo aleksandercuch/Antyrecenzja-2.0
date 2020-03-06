@@ -3,8 +3,9 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { connect } from 'react-redux';
-import './home.scss';
 import { compose } from "redux";
+import './home.scss';
+
 import LastNews from "./LastNews"
 import Description from "./Description"
 import Carousel from "./Carousel"
@@ -16,6 +17,8 @@ import firebase from "../../config/firebaseConfig";
 class Home extends Component {
 
   state = {
+    filteredChapters: [],
+    filteredReviews: [],
     filteredPosts: [],
     loading: true,
     allPosts: [],
@@ -33,12 +36,36 @@ class Home extends Component {
           tempPost.id = post.id;
           filteredPosts.push(tempPost)
         });
-        this.setState({
-          filteredPosts: filteredPosts,
-          loading: false,
-          allPosts: this.state.allPosts.concat(filteredPosts),
-          last: last
-        })
+        firebase.firestore().collection('chapters')
+          .orderBy("date", "desc")
+          .limit(1)
+          .get().then(chapters => {
+            let filteredChapters = [];
+            chapters.forEach(chapter => {
+              let tempChapter = chapter.data();
+              tempChapter.id = chapter.id;
+              filteredChapters.push(tempChapter)
+            });
+            firebase.firestore().collection('reviews')
+              .orderBy("date", "desc")
+              .limit(1)
+              .get().then(reviews => {
+                let filteredReviews = [];
+                reviews.forEach(review => {
+                  let tempReview = review.data();
+                  tempReview.id = review.id;
+                  filteredReviews.push(tempReview)
+                });
+                this.setState({
+                  filteredChapters: filteredChapters,
+                  filteredReviews: filteredReviews,
+                  filteredPosts: filteredPosts,
+                  loading: false,
+                  allPosts: this.state.allPosts.concat(filteredPosts),
+                  last: last
+                })
+              })
+          })
       })
   }
 
@@ -57,8 +84,26 @@ class Home extends Component {
               <Carousel />
             </Grid>
             <Grid item xs={6}>
-              <LastNews
-              />
+            <>
+                {this.state.loading ? (
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    spacing={1}
+                  >
+                    <Box p={2}>
+                      <CircularProgress />
+                    </Box>
+                  </Grid>
+                ) : (
+                    <LastNews
+                      chapters={this.state.filteredChapters}
+                      reviews={this.state.filteredReviews}
+                    />
+                  )}
+              </>
             </Grid>
             <Grid item xs={3}>
               <Description />
@@ -79,7 +124,7 @@ class Home extends Component {
                   </Grid>
                 ) : (
                     <Posts
-                      posts={this.props.posts}
+                      posts={this.state.allPosts}
                     />
                   )}
               </>
