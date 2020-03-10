@@ -12,6 +12,7 @@ import Register from "./components/auth/Register"
 import SignIn from "./components/auth/SignIn"
 import LogOut from "./components/auth/LogOut"
 import UploadText from "./components/addText/UploadText"
+import EditText from "./components/editText/EditText"
 import './App.scss';
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
           <Route exact path='/logowanie' component={SignIn} /> 
           <Route exact path='/wylogowywanie' component={LogOut} /> 
           <Route exact path='/add' component={UploadText} /> 
+          <Route exact path='/edycja/:id' component={EditText} /> 
           <Footer /> 
         </BrowserRouter>
       </div>

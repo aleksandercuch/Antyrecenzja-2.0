@@ -17,19 +17,21 @@ import Button from "@material-ui/core/Button";
 import firebase from "../../config/firebaseConfig";
 
 
-import './uploadCHapter.scss'
+import '../addText/uploadCHapter.scss'
 
-class UploadText extends Component {
+class EditText extends Component {
 
   state = {
+    descriptionContainerClass: '',
     title: '',
     content: '',
     intro: '',
     url: '',
     author: '',
     collection: '',
+    itemReady: false,
     showSuccess: false,
-    isLoading: false,
+    isLoading: true,
   };
 
   handleChange = (event) => {
@@ -39,11 +41,12 @@ class UploadText extends Component {
   };
 
   handleSubmit = (event) => {
+    const { id } = this.props.location.state
     event.preventDefault();
     this.setState({
       isLoading: true
     }, () => {
-      firebase.firestore().collection(this.state.collection).add({
+      firebase.firestore().collection(this.state.collection).doc(id).update({
         content: this.state.content,
         photo: this.state.url,
         title: this.state.title,
@@ -71,7 +74,30 @@ class UploadText extends Component {
 
   };
 
+  componentDidMount() {
+    if (!this.props.location.state) {
+      this.props.history.push('/')
+    } else {
+      const { collection } = this.props.location.state
+      const { content } = this.props.location.state
+      const { photo } = this.props.location.state
+      const { title } = this.props.location.state
+      const { intro } = this.props.location.state
+      const { author } = this.props.location.state
+
+      this.setState({
+        content: content,
+        url: photo,
+        title: title,
+        intro: intro,
+        collection: collection,
+        author: author,
+        isLoading: false,
+      });
+    }
+  }
   render() {
+
     return (
       <Paper>
         <Snackbar
@@ -86,7 +112,7 @@ class UploadText extends Component {
             message={
               <Typography>
                 <CheckCircleIcon />
-                Dodałeś tekst
+                Edytowano!
               </Typography>
             }
             action={[
@@ -110,7 +136,7 @@ class UploadText extends Component {
           >
             <Grid item xs={12}>
               <Typography variant='h4' component='p' align='center'>
-                Dodaj tekst
+                Edytujesz {this.state.title}
               </Typography>
             </Grid>
             <Grid item xs={10} sm={7}>
@@ -124,7 +150,7 @@ class UploadText extends Component {
                 >
                   <Grid item xs={12}>
                     <Typography variant='h5' component='p' align='center'>
-                      Dodawanie...
+                      Edytowanie...
                     </Typography>
                   </Grid>
                   <Grid item xs={12}>
@@ -176,9 +202,6 @@ class UploadText extends Component {
                           name="url"
                           fullWidth
                           value={this.state.url}
-                          validators={['required', 'minStringLength:5']}
-                          errorMessages={['this field is required', 'min length is 5']}
-
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -191,17 +214,14 @@ class UploadText extends Component {
                           validators={['required']}
                           errorMessages={['this field is required']}
                         />
-                        {this.state.collection}
                       </Grid>
                       <Grid item xs={12}>
                         <TextValidator
-                          label="Autor"
+                          label="Author"
                           onChange={this.handleChange}
-                          name="autor"
+                          name="author"
                           fullWidth
-                          value={this.state.auhtor}
-                          validators={['required']}
-                          errorMessages={['this field is required']}
+                          value={this.state.author}
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -220,7 +240,7 @@ class UploadText extends Component {
                         <Box pt={2}>
                           <Typography variant='body2' component='p'>
                             Kontent
-                        </Typography>
+                          </Typography>
                           <Paper className={this.state.descriptionContainerClass}>
                             <CKEditor
                               editor={DecoupledEditor}
@@ -233,6 +253,7 @@ class UploadText extends Component {
                               config={{
                                 'placeholder': 'It started at the inn...'
                               }}
+                              data={this.state.content}
                               onChange={(event, editor) => {
                                 const data = editor.getData();
                                 this.setState({
@@ -243,7 +264,6 @@ class UploadText extends Component {
                               }}
                             />
                           </Paper>
-                          
                         </Box>
                       </Grid>
                       <Grid item xs={12}>
@@ -257,7 +277,7 @@ class UploadText extends Component {
                           <Grid item>
                             <Box p={2}>
                               <Button type="submit" variant="contained" color="primary">
-                                Dodaj
+                                Edytuj
                               </Button>
                             </Box>
                           </Grid>
@@ -274,4 +294,4 @@ class UploadText extends Component {
   }
 }
 
-export default UploadText;
+export default EditText;

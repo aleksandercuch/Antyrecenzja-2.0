@@ -11,6 +11,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Divider from "@material-ui/core/Divider";
 import './stories.scss';
 import { Link } from "react-router-dom";
+import { Markup } from 'interweave';
 
 class MyWorks extends Component {
 
@@ -198,7 +199,7 @@ class MyWorks extends Component {
                                 </Grid>
                                 <Grid item xs={10}>
                                   <Typography variant="subtitle1">
-                                    {story.description}
+                                    <Markup content={story.intro} />
                                   </Typography>
                                 </Grid>
                                 <Grid item xs={12}>

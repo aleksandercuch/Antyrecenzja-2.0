@@ -74,7 +74,9 @@ class Posts extends Component {
                               collection: "reviews",
                               id: `${review.id}`
                             }
-                          }} >
+                          }}
+                            style={{ 'textDecoration': 'none' }}
+                          >
                             <Button variant="contained">Czytaj</Button>
                           </Link>
                         </Grid>
@@ -104,17 +106,18 @@ class Posts extends Component {
                               collection: "chapters",
                               id: `${chapter.id}`
                             }
-                          }} >
-                            <img src="https://cdn.pixabay.com/photo/2019/07/21/13/11/portrait-4352745_960_720.jpg" className="lastImages" alt="no image" />
+                          }}
+                          >
+                            <img src={chapter.photo} className="lastImages" alt="no image" />
                           </Link>
                         </Grid>
                         <Link to={{
                           pathname: `/tekst/${chapter.id}`,
                           state: {
-                            collection: "chapters"
+                            collection: "chapters",
+                            id: `${chapter.id}`
                           }
                         }}
-                          params={{ testvalue: "hello" }}
                           style={{ 'textDecoration': 'none' }}
                         >
                           <Button variant="contained">Czytaj</Button>

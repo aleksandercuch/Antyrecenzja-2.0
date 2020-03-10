@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import './reviews.scss';
 import { Link } from 'react-router-dom';
+import { Markup } from 'interweave';
 
 class AllReviews extends Component {
 
@@ -77,7 +78,7 @@ class AllReviews extends Component {
                           >
                             <Grid item xs={12}>
                               <Typography variant="subtitle1">
-                                {review.intro}
+                                <Markup content={review.intro} />
                               </Typography>
                             </Grid>
                             <Grid item xs={8}>
