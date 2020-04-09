@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import SignOutLinks from "./SignedOutLinks"
 import SignedInLinks from "./SignedInLinks"
 import { NavLink } from 'react-router-dom'
+import Hidden from '@material-ui/core/Hidden';
+import SmallNavbar from "./SmallNavbar"
 
 class Navbar extends Component {
   render() {
@@ -22,7 +24,8 @@ class Navbar extends Component {
               justify="space-between"
               alignItems="center"
             >
-              <Grid item xs={3}>
+
+              <Grid item md={3} xs={11}>
                 <NavLink to="/" style={{ 'textDecoration': 'none' }}>
                   <Button style={{ 'textTransform': 'none' }}>
                     <Typography variant="h5">
@@ -32,59 +35,75 @@ class Navbar extends Component {
                   </Button>
                 </NavLink>
               </Grid>
-              <Grid item xs={6}>
-                <Grid
-                  container
-                  direction="row"
-                  justify="center"
-                  alignItems="center"
-                  spacing={3}
-                >
-                  <Grid item >
-                    <NavLink to="/" style={{ 'textDecoration': 'none' }}>
-                      <Button style={{ 'textTransform': 'none' }}>
-                        <Typography variant="h6">
-                          Strona główna
-                        </Typography>
-                      </Button>
-                    </NavLink>
+
+              <Hidden>
+                <Hidden smDown>
+                  <Grid item xs={6}>
+                    <Grid
+                      container
+                      direction="row"
+                      justify="center"
+                      alignItems="center"
+                      spacing={3}
+                    >
+                      <Grid item >
+                        <NavLink to="/" style={{ 'textDecoration': 'none' }}>
+                          <Button style={{ 'textTransform': 'none' }}>
+                            <Typography variant="h6">
+                              Strona główna
+                            </Typography>
+                          </Button>
+                        </NavLink>
+                      </Grid>
+                      <Grid item>
+                        <NavLink to="/omnie" style={{ 'textDecoration': 'none' }}>
+                          <Button style={{ 'textTransform': 'none' }}>
+                            <Typography variant="h6">
+                              O mnie
+                            </Typography>
+                          </Button>
+                        </NavLink>
+                      </Grid>
+                      <Grid item>
+                        <NavLink to="/teksty" style={{ 'textDecoration': 'none' }}>
+                          <Button style={{ 'textTransform': 'none' }}>
+                            <Typography variant="h6">
+                              Teksty
+                            </Typography>
+                          </Button>
+                        </NavLink>
+                      </Grid>
+                      <Grid item>
+                        <NavLink to="/recenzje" style={{ 'textDecoration': 'none' }}>
+                          <Button style={{ 'textTransform': 'none' }}>
+                            <Typography variant="h6">
+                              Recenzje
+                            </Typography>
+                          </Button>
+                        </NavLink>
+                      </Grid>
+                    </Grid>
                   </Grid>
-                  <Grid item>
-                    <NavLink to="/omnie" style={{ 'textDecoration': 'none' }}>
-                      <Button style={{ 'textTransform': 'none' }}>
-                        <Typography variant="h6">
-                          O mnie
-                        </Typography>
-                      </Button>
-                    </NavLink>
+                </Hidden>
+              </Hidden>
+              <Hidden>
+                <Hidden smDown>
+                  <Grid item xs={3}>
+                    {!this.props.auth.uid ?
+                      <SignOutLinks />
+                      :
+                      <SignedInLinks />
+                    }
                   </Grid>
-                  <Grid item>
-                    <NavLink to="/teksty" style={{ 'textDecoration': 'none' }}>
-                      <Button style={{ 'textTransform': 'none' }}>
-                        <Typography variant="h6">
-                          Teksty
-                        </Typography>
-                      </Button>
-                    </NavLink>
+                </Hidden>
+              </Hidden>
+              <Hidden>
+                <Hidden mdUp>
+                  <Grid item xs={1}>
+                    <SmallNavbar />
                   </Grid>
-                  <Grid item>
-                    <NavLink to="/recenzje" style={{ 'textDecoration': 'none' }}>
-                      <Button style={{ 'textTransform': 'none' }}>
-                        <Typography variant="h6">
-                          Recenzje
-                        </Typography>
-                      </Button>
-                    </NavLink>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={3}>
-                {!this.props.auth.uid ?
-                  <SignOutLinks />
-                  :
-                  <SignedInLinks />
-                }
-              </Grid>
+                </Hidden>
+              </Hidden>
             </Grid>
           </Toolbar>
         </AppBar>

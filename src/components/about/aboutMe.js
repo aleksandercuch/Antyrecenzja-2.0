@@ -32,10 +32,10 @@ class AboutMe extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item md={6} xs={10}>
               <MyHistory />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item md={3} xs={10}>
               <PhotoPanel />
             </Grid>
           </Grid>

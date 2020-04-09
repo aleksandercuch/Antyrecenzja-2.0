@@ -10,7 +10,10 @@ import firebase from "../../config/firebaseConfig";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Link } from 'react-router-dom';
 import { Markup } from 'interweave';
-import Comments from './Comments'
+import Comments from './Comments';
+import {withRouter} from "react-router-dom";
+import {compose} from 'redux';
+import {connect} from 'react-redux';
 
 class TextTemplate extends Component {
 
@@ -18,8 +21,7 @@ class TextTemplate extends Component {
     items: [],
     itemReady: false,
     commentsReady: false,
-    collection: '',
-    comments: []
+    collection: ''
   }
 
   componentDidMount() {
@@ -42,25 +44,12 @@ class TextTemplate extends Component {
           itemReady: true
         })
       });
-      firebase.firestore().collection(collection).doc(id).collection('comments')
-        .orderBy("date", "desc")
-        .get().then(items => {
-          let comments = [];
-          items.forEach(item => {
-            let tempItem = item.data();
-            tempItem.id = item.id;
-            comments.push(tempItem)
-          });
-          this.setState({
-            comments: comments,
-            commentsReady: true,
-          })
-        })
-
     }
   }
   render() {
     let items = this.state.items;
+    const { id } = this.props.location.state;
+    const { collection } = this.props.location.state;
     return (
       <>
         <Grid
@@ -141,7 +130,7 @@ class TextTemplate extends Component {
                                     >
                                       <Button variant="contained" color="primary">
                                         Edytuj
-                                </Button>
+                                      </Button>
                                     </Link>
                                   </Grid>
                                 </Grid>
@@ -191,17 +180,16 @@ class TextTemplate extends Component {
                 </Grid>
               )}
           </Grid>
-          {this.state.commentsReady ? (
-            <Grid item xs={12}>
-             {/* <Comments
-                comments={this.state.comments}
+          {this.state.itemReady ?  (
+            <Grid item xs={9}>
+             <Comments
                 user={{ userId: this.props.auth.uid, userNick: this.props.nick }}
-                docId={this.props.match.params.id}
-                collection={this.state.collection}
-              />*/}
+                docId={id}
+                collection={collection}
+              />
             </Grid>
           ) : (
-              <Grid item xs={12}>
+              <Grid item xs={9}>
                 <Grid
                   container
                   direction="row"
@@ -216,8 +204,6 @@ class TextTemplate extends Component {
               </Grid>
             )}
         </Grid>
-
-
       </>
     );
   }
@@ -231,4 +217,5 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default TextTemplate;
+export default withRouter(compose(
+  connect(mapStateToProps))(TextTemplate));

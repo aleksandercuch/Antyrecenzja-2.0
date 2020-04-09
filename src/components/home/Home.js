@@ -17,8 +17,7 @@ import firebase from "../../config/firebaseConfig";
 class Home extends Component {
 
   state = {
-    filteredChapters: [],
-    filteredReviews: [],
+    filteredExpoItems: [],
     filteredPosts: [],
     loading: true,
     allPosts: [],
@@ -26,45 +25,32 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    firebase.firestore().collection('posts')
+      firebase.firestore().collection('posts')
       .orderBy("date", "desc")
       .get().then(posts => {
         let filteredPosts = [];
-        let last = posts.docs[posts.docs.length - 1];
         posts.forEach(post => {
           let tempPost = post.data();
           tempPost.id = post.id;
           filteredPosts.push(tempPost)
         });
-        firebase.firestore().collection('chapters')
+          firebase.firestore().collection('texts')
           .orderBy("date", "desc")
-          .limit(1)
-          .get().then(chapters => {
-            let filteredChapters = [];
-            chapters.forEach(chapter => {
-              let tempChapter = chapter.data();
-              tempChapter.id = chapter.id;
-              filteredChapters.push(tempChapter)
+          .limit(2)
+          .get().then(items => {
+            let filteredItems = [];
+            items.forEach(item => {
+              let tempItem= item.data();
+              tempItem.id = item.id;
+              filteredItems.push(tempItem)
             });
-            firebase.firestore().collection('reviews')
-              .orderBy("date", "desc")
-              .limit(1)
-              .get().then(reviews => {
-                let filteredReviews = [];
-                reviews.forEach(review => {
-                  let tempReview = review.data();
-                  tempReview.id = review.id;
-                  filteredReviews.push(tempReview)
-                });
                 this.setState({
-                  filteredChapters: filteredChapters,
-                  filteredReviews: filteredReviews,
+                  filteredExpoItems: filteredItems,
                   filteredPosts: filteredPosts,
                   loading: false,
                   allPosts: this.state.allPosts.concat(filteredPosts),
-                  last: last
                 })
-              })
+            
           })
       })
   }
@@ -83,7 +69,7 @@ class Home extends Component {
             <Grid item xs={12}>
               <Carousel />
             </Grid>
-            <Grid item xs={6}>
+            <Grid item md={6} xs={10}>
             <>
                 {this.state.loading ? (
                   <Grid
@@ -99,16 +85,15 @@ class Home extends Component {
                   </Grid>
                 ) : (
                     <LastNews
-                      chapters={this.state.filteredChapters}
-                      reviews={this.state.filteredReviews}
+                      items={this.state.filteredExpoItems}
                     />
                   )}
               </>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item md={3} xs={10}>
               <Description />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item md={9} xs={10}>
               <>
                 {this.state.loading ? (
                   <Grid

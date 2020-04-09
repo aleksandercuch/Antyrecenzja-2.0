@@ -77,7 +77,7 @@ class Reviews extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item xs={6}>
+            <Grid item md ={6} xs={10}>
               <>
                 {this.state.loading ? (
                   <Grid
@@ -98,7 +98,7 @@ class Reviews extends Component {
                   )}
               </>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item md={3} xs={10}>
               <Grid
                 container
                 direction="column"

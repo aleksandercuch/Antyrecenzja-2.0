@@ -55,7 +55,7 @@ class AllReviews extends Component {
                         alignItems="flex-start"
                         spacing={1}
                       >
-                        <Grid item xs={5} >
+                        <Grid item sm={5} xs={12}>
                           <Link to={{
                             pathname: `/tekst/${review.id}`,
                             state: {
@@ -68,7 +68,7 @@ class AllReviews extends Component {
                             <img style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .05)', padding: '2em' }} className="reviewImage" src={review.photo} alt="error" />
                           </Link>
                         </Grid>
-                        <Grid item xs={7}>
+                        <Grid item sm={7} xs={12}>
                           <Grid
                             container
                             direction="column"

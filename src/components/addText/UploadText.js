@@ -27,7 +27,7 @@ class UploadText extends Component {
     intro: '',
     url: '',
     author: '',
-    collection: '',
+    type: '',
     showSuccess: false,
     isLoading: false,
   };
@@ -43,12 +43,14 @@ class UploadText extends Component {
     this.setState({
       isLoading: true
     }, () => {
-      firebase.firestore().collection(this.state.collection).add({
+      firebase.firestore().collection("texts").add({
         content: this.state.content,
+        type: this.state.type,
         photo: this.state.url,
         title: this.state.title,
         intro: this.state.intro,
-        author: this.state.author
+        author: this.state.author,
+        date: new Date()
       }).then(() => {
         this.setState({
           isLoading: false,
@@ -165,8 +167,8 @@ class UploadText extends Component {
                           name="title"
                           fullWidth
                           value={this.state.title}
-                          validators={['required', 'minStringLength:5']}
-                          errorMessages={['this field is required', 'min length is 5']}
+                          validators={['required']}
+                          errorMessages={['this field is required']}
                         />
                       </Grid>
                       <Grid item xs={12}>
@@ -176,30 +178,26 @@ class UploadText extends Component {
                           name="url"
                           fullWidth
                           value={this.state.url}
-                          validators={['required', 'minStringLength:5']}
-                          errorMessages={['this field is required', 'min length is 5']}
-
                         />
                       </Grid>
                       <Grid item xs={12}>
                         <TextValidator
-                          label="Collection"
+                          label="Rodzaj tekstu (post/review/chapter/story)"
                           onChange={this.handleChange}
-                          name="collection"
+                          name="type"
                           fullWidth
-                          value={this.state.collection}
+                          value={this.state.type}
                           validators={['required']}
                           errorMessages={['this field is required']}
                         />
-                        {this.state.collection}
                       </Grid>
                       <Grid item xs={12}>
                         <TextValidator
                           label="Autor"
                           onChange={this.handleChange}
-                          name="autor"
+                          name="author"
                           fullWidth
-                          value={this.state.auhtor}
+                          value={this.state.author}
                           validators={['required']}
                           errorMessages={['this field is required']}
                         />

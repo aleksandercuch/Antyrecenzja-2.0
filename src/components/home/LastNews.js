@@ -13,8 +13,8 @@ class Posts extends Component {
   state = {};
 
   render() {
-    let chapters = this.props.chapters;
-    let reviews = this.props.reviews;
+    let items = this.props.items;
+
     return (
       <>
         <Paper className="padding">
@@ -41,9 +41,9 @@ class Posts extends Component {
                 <Grid item xs={12}>
                   <Divider variant="fullWidth" />
                 </Grid>
-                <Grid item xs={6} style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .2)', padding: '0.5em' }}>
-                  {reviews.map(review => {
-                    return (
+                {items.map(item => {
+                  return (
+                    <Grid item xs={6} style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .2)', padding: '0.5em' }}>
                       <Grid
                         container
                         direction="column"
@@ -56,23 +56,23 @@ class Posts extends Component {
                             Recenzja
                           </Typography>
                         </Grid>
-                        <Grid item xs={12}>
+                        <Grid item md={8} xs={7}>
                           <Link to={{
-                            pathname: `/tekst/${review.id}`,
+                            pathname: `/tekst/${item.id}`,
                             state: {
                               collection: "reviews",
-                              id: `${review.id}`
+                              id: `${item.id}`
                             }
                           }} >
-                            <img src={review.photo} className="lastImages" alt="no image" />
+                            <img src={item.photo} className="lastImages" alt="no image" />
                           </Link>
                         </Grid>
                         <Grid item xs={12}>
                           <Link to={{
-                            pathname: `/tekst/${review.id}`,
+                            pathname: `/tekst/${item.id}`,
                             state: {
                               collection: "reviews",
-                              id: `${review.id}`
+                              id: `${item.id}`
                             }
                           }}
                             style={{ 'textDecoration': 'none' }}
@@ -81,51 +81,9 @@ class Posts extends Component {
                           </Link>
                         </Grid>
                       </Grid>
-                    )
-                  })}
-                </Grid>
-                <Grid item xs={6} style={{ padding: '0.5em' }}>
-                  {chapters.map(chapter => {
-                    return (
-                      <Grid
-                        container
-                        direction="column"
-                        justify="center"
-                        alignItems="center"
-                        spacing={2}
-                      >
-                        <Grid item>
-                          <Typography align="center" variant="h6">
-                            Ostatni Zwiastun - rozdział {chapter.number}
-                          </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                          <Link to={{
-                            pathname: `/tekst/${chapter.id}`,
-                            state: {
-                              collection: "chapters",
-                              id: `${chapter.id}`
-                            }
-                          }}
-                          >
-                            <img src={chapter.photo} className="lastImages" alt="no image" />
-                          </Link>
-                        </Grid>
-                        <Link to={{
-                          pathname: `/tekst/${chapter.id}`,
-                          state: {
-                            collection: "chapters",
-                            id: `${chapter.id}`
-                          }
-                        }}
-                          style={{ 'textDecoration': 'none' }}
-                        >
-                          <Button variant="contained">Czytaj</Button>
-                        </Link>
-                      </Grid>
-                    )
-                  })}
-                </Grid>
+                    </Grid>
+                  )
+                })}
               </Grid>
             </Grid>
           </Grid>

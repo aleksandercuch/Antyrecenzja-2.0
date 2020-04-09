@@ -33,7 +33,7 @@ class Posts extends Component {
                     justify="space-between"
                     alignItems="flex-start"
                   >
-                    <Grid item xs={5}>
+                    <Grid item md={5} xs={12}>
                       <Grid
                         container
                         direction="column"
@@ -55,7 +55,7 @@ class Posts extends Component {
                         </Grid>
                       </Grid>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid item md={7} xs={12}>
                       <img className="postImg" src={post.photo} alt="image error" />
                     </Grid>
                   </Grid>

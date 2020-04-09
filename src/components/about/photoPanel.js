@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import Divider from "@material-ui/core/Divider";
 import './about.scss';
-import EmailIcon from '@material-ui/icons/Email';
+
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
@@ -40,7 +40,7 @@ class PhotoPanel extends Component {
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <Divider />
+              <hr />
             </Grid>
             <Grid item xs={12}>
               <Typography align="center" variant="h5">Znajdziesz mnie na:</Typography>
@@ -52,79 +52,70 @@ class PhotoPanel extends Component {
               <Grid
                 container
                 direction="row"
-                justify="flex-start"
-                alignItems="flex-start"
-                spacing={2}
+                justify="center"
+                alignItems="center"
               >
-                <Grid item xs={2}>
-                  <EmailIcon />
+                <Grid item xs={4}>
+                  <Link href="https://www.facebook.com/Antyrecenzja/?modal=admin_todo_tour" style={{ 'textDecoration': 'none' }}>
+                    <Grid
+                      container
+                      direction="column"
+                      justify="center"
+                      alignItems="center"
+                    >
+                      <Grid item xs={12}>
+                        <FacebookIcon />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="body1">
+                          Facebook
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Link>
                 </Grid>
-                <Grid item xs={10}>
-                  <Typography variant="body1">
-                    cuch.aleksander@gmail.com
-                  </Typography>
+                <Grid item xs={4}>
+                  <Link href="https://www.instagram.com/aleksandercuch/" style={{ 'textDecoration': 'none' }}>
+                    <Grid
+                      container
+                      direction="column"
+                      justify="center"
+                      alignItems="center"
+                    >
+                      <Grid item xs={12}>
+                        <InstagramIcon />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="body1">
+                          Instagram
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Link>
+                </Grid>
+                <Grid item xs={4}>
+                  <Link href="https://www.linkedin.com/in/aleksander-cuch-161118180/" style={{ 'textDecoration': 'none' }}>
+                    <Grid
+                      container
+                      direction="column"
+                      justify="center"
+                      alignItems="center"
+                    >
+                      <Grid item xs={12}>
+                        <LinkedInIcon />
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="body1">
+                          LinkedIn
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </Link>
                 </Grid>
               </Grid>
             </Grid>
             <Grid item xs={12}>
-              <Link href="https://www.facebook.com/Antyrecenzja/?modal=admin_todo_tour">
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="flex-start"
-                  spacing={2}
-                >
-                  <Grid item xs={2}>
-                    <FacebookIcon />
-                  </Grid>
-                  <Grid item xs={10}>
-                    <Typography variant="body1">
-                      facebook.com
-                  </Typography>
-                  </Grid>
-                </Grid>
-              </Link>
-            </Grid>
-            <Grid item xs={12}>
-              <Link href="https://www.instagram.com/aleksandercuch/">
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="flex-start"
-                  spacing={2}
-                >
-                  <Grid item xs={2}>
-                    <InstagramIcon />
-                  </Grid>
-                  <Grid item xs={10}>
-                    <Typography variant="body1">
-                      instagram.com
-                  </Typography>
-                  </Grid>
-                </Grid>
-              </Link>
-            </Grid>
-            <Grid item xs={12}>
-              <Link href="https://www.linkedin.com/in/aleksander-cuch-161118180/">
-                <Grid
-                  container
-                  direction="row"
-                  justify="flex-start"
-                  alignItems="flex-start"
-                  spacing={2}
-                >
-                  <Grid item xs={2}>
-                    <LinkedInIcon />
-                  </Grid>
-                  <Grid item xs={10}>
-                    <Typography variant="body1">
-                      linkedin.com
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </Link>
+              <hr />
             </Grid>
             <Grid item xs={12}>
               <Grid
