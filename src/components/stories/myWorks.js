@@ -110,7 +110,7 @@ class MyWorks extends Component {
                             >
                               {chapters.map(chapter => {
                                 return (
-                                  <Grid item xs={12}>
+                                  <Grid item xs={12} key={chapter.id}>
                                     <Grid
                                       container
                                       direction="row"
@@ -170,7 +170,7 @@ class MyWorks extends Component {
                 </Grid>
                 {others.map(story => {
                   return (
-                    <Grid item xs={12}>
+                    <Grid item xs={12} key={story.id}>
                       <ExpansionPanel>
                         <ExpansionPanelSummary
                           expandIcon={<ExpandMoreIcon />}

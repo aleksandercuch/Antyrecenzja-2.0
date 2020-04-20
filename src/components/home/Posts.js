@@ -17,7 +17,8 @@ class Posts extends Component {
         <>
           {posts.map(post => {
             return (
-              <Box mb={7}>
+              <Box mb={7}
+              key={post.id}>
                 <Link to={{
                   pathname: `/tekst/${post.id}`,
                   state: {
@@ -40,6 +41,7 @@ class Posts extends Component {
                         justify="center"
                         alignItems="flex-start"
                         spacing={2}
+                        className="padding"
                       >
                         <Grid item>
                           <Typography style={{ 'color': 'black' }} variant="h3">{post.title} </Typography>
@@ -51,12 +53,12 @@ class Posts extends Component {
                           <Typography variant="h5" style={{ color: 'rgb(105,105,105)' }}>{post.intro}</Typography>
                         </Grid>
                         <Grid item>
-                          <Typography style={{ 'color': 'black' }} variant="body1">by Aleksander</Typography>
+                          <Typography style={{ 'color': 'black' }} variant="body1">by {post.author}</Typography>
                         </Grid>
                       </Grid>
                     </Grid>
                     <Grid item md={7} xs={12}>
-                      <img className="postImg" src={post.photo} alt="image error" />
+                      <img className="postImg" src={post.photo} alt="error" />
                     </Grid>
                   </Grid>
                   <hr />

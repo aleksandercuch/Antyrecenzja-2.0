@@ -25,7 +25,8 @@ class Home extends Component {
   };
 
   componentDidMount() {
-      firebase.firestore().collection('posts')
+      firebase.firestore().collection('texts')
+      .where("type", "==", "post")
       .orderBy("date", "desc")
       .get().then(posts => {
         let filteredPosts = [];
@@ -35,6 +36,7 @@ class Home extends Component {
           filteredPosts.push(tempPost)
         });
           firebase.firestore().collection('texts')
+          .where("newsTable", "==", true)
           .orderBy("date", "desc")
           .limit(2)
           .get().then(items => {
@@ -86,6 +88,7 @@ class Home extends Component {
                 ) : (
                     <LastNews
                       items={this.state.filteredExpoItems}
+                      admin={this.props.admin}
                     />
                   )}
               </>
@@ -123,7 +126,9 @@ class Home extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    admin: state.firebase.profile.admin,
+    profile: state.firebase.profile,
   }
 };
 

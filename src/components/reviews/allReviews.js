@@ -47,7 +47,7 @@ class AllReviews extends Component {
                 </Grid>
                 {reviews.map(review => {
                   return (
-                    <Grid item xs={12}>
+                    <Grid item xs={12} key={review.id}>
                       <Grid
                         container
                         direction="row"
@@ -58,10 +58,6 @@ class AllReviews extends Component {
                         <Grid item sm={5} xs={12}>
                           <Link to={{
                             pathname: `/tekst/${review.id}`,
-                            state: {
-                              collection: "reviews",
-                              id: `${review.id}`
-                            }
                           }}
                             style={{ 'textDecoration': 'none' }}
                           >
@@ -85,10 +81,6 @@ class AllReviews extends Component {
                               <Box mr={10}>
                                 <Link to={{
                                   pathname: `/tekst/${review.id}`,
-                                  state: {
-                                    collection: "reviews",
-                                    id: `${review.id}`
-                                  }
                                 }}
                                   style={{ 'textDecoration': 'none' }}
                                 >
@@ -99,7 +91,7 @@ class AllReviews extends Component {
                           </Grid>
                         </Grid>
                         <Grid item xs={12}>
-                          <Divider orientation='horizontal' />
+                          <hr />
                         </Grid>
                       </Grid>
                     </Grid>

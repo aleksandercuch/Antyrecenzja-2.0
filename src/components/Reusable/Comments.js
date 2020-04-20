@@ -17,9 +17,6 @@ import Box from "@material-ui/core/Box";
 import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import moment from 'moment';
 
-let Filter = require('bad-words');
-let filter = new Filter({ placeHolder: '*' });
-
 const initialState = {
   text: '',
   isLoading: false,
@@ -75,7 +72,9 @@ class Comments extends Component {
       }, () => {
         firebase.firestore().collection(this.props.collection).doc(this.props.docId).collection('comments').add({
           text: this.state.text,
-          author: "Bogdan",
+          author: this.props.user.userNick,
+          status: this.props.user.userAdmin,
+          unlogged: false,
           date: new Date(),
         }).then(() => {
           this.setState({
@@ -100,6 +99,7 @@ class Comments extends Component {
         firebase.firestore().collection(this.props.collection).doc(this.props.docId).collection('comments').add({
           text: this.state.text,
           author: this.state.username,
+          unlogged: true,
           date: new Date(),
         }).then(() => {
           this.setState({
@@ -200,7 +200,7 @@ class Comments extends Component {
                         <Box p={2}>
                           <Button type="submit" variant="contained" color="primary">
                             Wyślij
-                            </Button>
+                          </Button>
                         </Box>
                       </Grid>
                     </Grid>
@@ -283,8 +283,21 @@ class Comments extends Component {
                           spacing={2}
                         >
                           <Grid item>
-                            <Avatar alt="avatar error" src={comment.userAvatar ? comment.userAvatar
-                              : 'https://firebasestorage.googleapis.com/v0/b/forgeit-100.appspot.com/o/avatars%2Favatar-1577909_640%20(1).png?alt=media&token=8eb9002e-778f-4933-bb16-3ae67ddd9f53'} />
+                            {comment.unlogged ? (
+                              <Avatar alt="avatar error" src={comment.userAvatar ? comment.userAvatar
+                                : 'https://firebasestorage.googleapis.com/v0/b/forgeit-100.appspot.com/o/avatars%2Favatar-1577909_640%20(1).png?alt=media&token=8eb9002e-778f-4933-bb16-3ae67ddd9f53'} />
+                            ) : (
+                                <>
+                                  {comment.status ? (
+                                    <Avatar alt="avatar error" src={comment.userAvatar ? comment.userAvatar
+                                      : 'https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/14141633_1111643665597304_5943056743569652872_n.jpg?_nc_cat=102&_nc_sid=7aed08&_nc_ohc=m9YfqsAHSyIAX_xMFBV&_nc_ht=scontent-waw1-1.xx&oh=8c47f7e3602b9a2bfefe9484035a2025&oe=5EF46B3C'} />
+                                  ) : (
+                                      <Avatar alt="avatar error" src={comment.userAvatar ? comment.userAvatar
+                                        : 'https://cdn.pixabay.com/photo/2017/01/26/14/52/alphabet-2010751_960_720.png'} />
+                                    )}
+                                </>
+                              )}
+
                           </Grid>
                           <Grid item>
                             {comment.author}
@@ -295,12 +308,14 @@ class Comments extends Component {
                         <Typography style={{ 'color': 'black' }} variant="caption">
                           {moment(comment.date.toMillis()).format('LL')}
                         </Typography>
-                        <Button
-                        onClick={() => this.DeleteComment(
-                          comment.id,
-                        )}>
-                          <CloseIcon />
-                        </Button>
+                        {this.props.user.userAdmin && (
+                          <Button
+                            onClick={() => this.DeleteComment(
+                              comment.id,
+                            )}>
+                            <CloseIcon />
+                          </Button>
+                        )}
                       </Grid>
                     </Grid>
                   </Grid>

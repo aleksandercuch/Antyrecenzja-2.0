@@ -10,6 +10,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextTemplate from "./components/Reusable/TextTemplate"
 import Register from "./components/auth/Register"
 import SignIn from "./components/auth/SignIn"
+import ResetPassword from "./components/auth/Reset"
 import LogOut from "./components/auth/LogOut"
 import UploadText from "./components/addText/UploadText"
 import EditText from "./components/editText/EditText"
@@ -31,7 +32,8 @@ class App extends Component {
           <Route exact path='/logowanie' component={SignIn} /> 
           <Route exact path='/wylogowywanie' component={LogOut} /> 
           <Route exact path='/add' component={UploadText} /> 
-          <Route exact path='/edycja/:id' component={EditText} /> 
+          <Route exact path='/edycja/:id' component={EditText} />
+          <Route exact path='/reset' component={ResetPassword} />  
           <Footer /> 
         </BrowserRouter>
       </div>

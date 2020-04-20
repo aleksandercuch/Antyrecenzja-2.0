@@ -1,14 +1,11 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
+import Box from '@material-ui/core/Box';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles({
@@ -37,33 +34,6 @@ export default function TemporaryDrawer() {
     setState({ ...state, [side]: open });
   };
 
-  const sideList = side => (
-    <div
-      className={classes.list}
-      role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
   const fullList = side => (
     <div
       className={classes.fullList}
@@ -72,21 +42,49 @@ export default function TemporaryDrawer() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+        <NavLink to="/" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
+          <ListItem button="true">
+            <Box fontWeight="fontWeightBold">
+              Strona Główna
+            </Box>
           </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
+        </NavLink>
+        <NavLink to="/omnie" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
+          <ListItem button="true">
+            <Box fontWeight="fontWeightBold">
+              O mnie
+            </Box>
           </ListItem>
-        ))}
+        </NavLink>
+        <ListItem button="true">
+          <Box fontWeight="fontWeightBold">
+            <NavLink to="/teksty" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
+              Teksty
+            </NavLink>
+          </Box>
+        </ListItem>
+        <NavLink to="/recenzje" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
+          <ListItem button="true">
+            <Box fontWeight="fontWeightBold">
+              Recenzje
+            </Box>
+          </ListItem>
+        </NavLink>
+        <hr />
+        <NavLink to="/logowanie" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
+          <ListItem button="true">
+            <Box fontWeight="fontWeightBold">
+              Logowanie
+            </Box>
+          </ListItem>
+        </NavLink>
+        <NavLink to="/rejestracja" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
+          <ListItem button="true">
+            <Box fontWeight="fontWeightBold">
+              Rejestracja
+            </Box>
+          </ListItem>
+        </NavLink>
       </List>
     </div>
   );

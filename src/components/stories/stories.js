@@ -20,17 +20,18 @@ class Stories extends Component {
   };
 
   componentDidMount() {
-    firebase.firestore().collection('chapters')
-      .orderBy("number")
+    firebase.firestore().collection('texts')
+      .where("type", "==", "chapter")
+      .orderBy("date", "desc")
       .get().then(items => {
         let filteredChapters = [];
-        let last = items.docs[items.docs.length - 1];
         items.forEach(item => {
           let tempItem = item.data();
           tempItem.id = item.id;
           filteredChapters.push(tempItem)
         });
-        firebase.firestore().collection('others')
+        firebase.firestore().collection('texts')
+          .where("type", "==", "story")
           .orderBy("date", "desc")
           .get().then(items => {
             let filteredOthers = [];

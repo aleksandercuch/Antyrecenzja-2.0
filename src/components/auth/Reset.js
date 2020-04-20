@@ -7,15 +7,21 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { signIn } from "../../store/actions/authActions";
 import { connect } from 'react-redux'
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import './auth.scss'
+import firebase from "../../config/firebaseConfig";
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
-class SignIn extends Component {
+class Reset extends Component {
 
   state = {
-    password: '',
-    email: ''
+    email: '',
+    showSuccess: false,
   };
 
   handleChange = (event) => {
@@ -23,10 +29,13 @@ class SignIn extends Component {
       [event.target.name]: event.target.value
     });
   };
-
+ 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.signIn(this.state)
+    firebase.resetPassword(this.state.email)
+    this.setState({
+      showSuccess: true
+    });
   };
 
   render() {
@@ -36,6 +45,32 @@ class SignIn extends Component {
 
     return (
       <div className="imageBackgroundLogin">
+      <Snackbar
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          open={this.state.showSuccess}
+          autoHideDuration={3000}
+        >
+          <SnackbarContent
+            message={
+              <Typography>
+                <CheckCircleIcon />
+                Jeśli wpisałeś adres e-mail poprawnie, wkrótce dostaniesz ode mnie wiadomość :)
+              </Typography>
+            }
+            action={[
+              <IconButton key="close" aria-label="close" color="inherit" onClick={() => {
+                this.setState({
+                  showSuccess: false
+                });
+              }}>
+                <CloseIcon />
+              </IconButton>,
+            ]}
+          />
+        </Snackbar>
         <Grid
           container
           direction="row"
@@ -57,11 +92,16 @@ class SignIn extends Component {
                       direction="row"
                       justify="center"
                       alignItems="center"
-                      spacing={1}
+                      spacing={2}
                     >
                       <Grid item xs={12}>
                         <Typography variant="h4" align="center" component="h3">
-                          Logowanie
+                          Resetowanie hasła
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Typography variant="body2" align="center" >
+                          Wiadomość z możliwością zresetowania hasła otrzymasz na podany przez Ciebie adres e-mail:
                         </Typography>
                       </Grid>
                       <Grid item xs={12}>
@@ -69,7 +109,6 @@ class SignIn extends Component {
                           label="e-mail"
                           onChange={this.handleChange}
                           name="email"
-                          id='loginEmail'
                           fullWidth
                           value={this.state.email}
                           validators={['required', 'isEmail']}
@@ -78,18 +117,6 @@ class SignIn extends Component {
                         </TextValidator>
                       </Grid>
                       <Grid item xs={12}>
-                        <TextValidator
-                          label="hasło"
-                          onChange={this.handleChange}
-                          name="password"
-                          type="password"
-                          id='loginPassword'
-                          fullWidth
-                          value={this.state.password}
-                          validators={['required']}
-                          errorMessages={['this field is required']}
-                        >
-                        </TextValidator>
                       </Grid>
                       {
                         error && (
@@ -99,15 +126,8 @@ class SignIn extends Component {
                         )
                       }
                       <Box mb={2} pt={2}>
-                        <Button type="submit" variant="contained" color="primary" id='loginButton'>Zaloguj się</Button>
+                        <Button type="submit" variant="contained" color="primary">Wyślij wiadomość</Button>
                       </Box>
-                    </Grid>
-                    <Grid item xs={12}>
-                      <Link to={`/reset`} style={{ 'textDecoration': 'none' }}>
-                        <Typography color="primary" variant="body2" align="center" >
-                          Zapomniałeś hasła?
-                        </Typography>
-                      </Link>
                     </Grid>
                   </ValidatorForm>
                 </Box>
@@ -134,4 +154,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(Reset);

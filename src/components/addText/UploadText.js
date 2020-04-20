@@ -9,12 +9,15 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { TextValidator, ValidatorForm, SelectValidator } from "react-material-ui-form-validator";
+import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import Paper from "@material-ui/core/Paper";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import Button from "@material-ui/core/Button";
 import firebase from "../../config/firebaseConfig";
+import { connect } from 'react-redux';
+import { compose } from "redux";
+import { Redirect } from "react-router-dom";
 
 
 import './uploadCHapter.scss'
@@ -39,41 +42,69 @@ class UploadText extends Component {
   };
 
   handleSubmit = (event) => {
-    event.preventDefault();
-    this.setState({
-      isLoading: true
-    }, () => {
-      firebase.firestore().collection("texts").add({
-        content: this.state.content,
-        type: this.state.type,
-        photo: this.state.url,
-        title: this.state.title,
-        intro: this.state.intro,
-        author: this.state.author,
-        date: new Date()
-      }).then(() => {
-        this.setState({
-          isLoading: false,
-          showSuccess: true
-        }, () => {
-          setTimeout(() => {
-            this.setState({
-              showSuccess: false
-            });
-          }, 3000);
+    if (this.state.type === "post") {
+      event.preventDefault();
+      this.setState({
+        isLoading: true
+      }, () => {
+        firebase.firestore().collection("texts").add({
+          content: this.state.content,
+          type: this.state.type,
+          photo: this.state.url,
+          title: this.state.title,
+          intro: this.state.intro,
+          author: this.state.author,
+          newsTable: false,
+          date: new Date()
+        }).then(() => {
+          this.setState({
+            isLoading: false,
+            showSuccess: true
+          }, () => {
+            setTimeout(() => {
+              this.setState({
+                showSuccess: false
+              });
+            }, 3000);
+          })
         })
-      })
-    });
-  };
-
-  handleFormError = () => {
-    let words = this.state.content.replace(/<[^>]*>/g, " ");
-    words = words.replace(/\s+/g, ' ').trim();
-    words = words.split(" ").length;
-
+      });
+    }
+    else {
+      event.preventDefault();
+      this.setState({
+        isLoading: true
+      }, () => {
+        firebase.firestore().collection("texts").add({
+          content: this.state.content,
+          type: this.state.type,
+          photo: this.state.url,
+          title: this.state.title,
+          intro: this.state.intro,
+          author: this.state.author,
+          newsTable: true,
+          date: new Date()
+        }).then(() => {
+          this.setState({
+            isLoading: false,
+            showSuccess: true
+          }, () => {
+            setTimeout(() => {
+              this.setState({
+                showSuccess: false
+              });
+            }, 3000);
+          })
+        })
+      });
+    }
   };
 
   render() {
+    const { admin } = this.props;
+
+    if (!admin) return <Redirect to='/' />;
+
     return (
       <Paper>
         <Snackbar
@@ -151,7 +182,6 @@ class UploadText extends Component {
               ) : (
                   <ValidatorForm
                     onSubmit={this.handleSubmit}
-                    onError={this.handleFormError}
                   >
                     <Grid
                       container
@@ -235,13 +265,11 @@ class UploadText extends Component {
                                 const data = editor.getData();
                                 this.setState({
                                   content: data
-                                }, () => {
-                                  this.handleFormError();
                                 });
                               }}
                             />
                           </Paper>
-                          
+
                         </Box>
                       </Grid>
                       <Grid item xs={12}>
@@ -272,4 +300,15 @@ class UploadText extends Component {
   }
 }
 
-export default UploadText;
+const mapStateToProps = (state) => {
+  return {
+    admin: state.firebase.profile.admin,
+    profile: state.firebase.profile,
+  }
+};
+
+
+export default compose(
+  connect(mapStateToProps)
+)(UploadText);
+

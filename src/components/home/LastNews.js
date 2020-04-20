@@ -38,12 +38,33 @@ class Posts extends Component {
                     Ostatnio wyszły spod pióra:
                   </Typography>
                 </Grid>
+                {this.props.admin && (
+                  <Grid item xs={12}>
+                    <Grid
+                      container
+                      direction="column"
+                      justify="center"
+                      alignItems="center"
+                      spacing={2}
+                    >
+                      <Grid item xs={12}>
+                        <Link to={{
+                          pathname: `/add`,
+                        }}
+                          style={{ 'textDecoration': 'none' }}
+                        >
+                          <Button color="primary" variant="contained">Napisz coś nowego!</Button>
+                        </Link>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                )}
                 <Grid item xs={12}>
                   <Divider variant="fullWidth" />
                 </Grid>
                 {items.map(item => {
                   return (
-                    <Grid item xs={6} style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .2)', padding: '0.5em' }}>
+                    <Grid item xs={6} key={item.id} style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .2)', padding: '0.5em' }}>
                       <Grid
                         container
                         direction="column"
@@ -52,28 +73,38 @@ class Posts extends Component {
                         spacing={2}
                       >
                         <Grid item>
-                          <Typography align="center" variant="h6">
-                            Recenzja
-                          </Typography>
+                          <>
+                            {item.type === "review" && (
+                              <Typography align="center" variant="h6">
+                                Recenzja
+                              </Typography>
+                            )}
+                          </>
+                          <>
+                            {item.type === "story" && (
+                              <Typography align="center" variant="h6">
+                                Opowiadanie - {item.title}
+                              </Typography>
+                            )}
+                          </>
+                          <>
+                            {item.type === "chapter" && (
+                              <Typography align="center" variant="h6">
+                                Ostatni Zwiastun - {item.title}
+                              </Typography>
+                            )}
+                          </>
                         </Grid>
                         <Grid item md={8} xs={7}>
                           <Link to={{
                             pathname: `/tekst/${item.id}`,
-                            state: {
-                              collection: "reviews",
-                              id: `${item.id}`
-                            }
                           }} >
-                            <img src={item.photo} className="lastImages" alt="no image" />
+                            <img src={item.photo} className="lastImages" alt="error" />
                           </Link>
                         </Grid>
                         <Grid item xs={12}>
                           <Link to={{
                             pathname: `/tekst/${item.id}`,
-                            state: {
-                              collection: "reviews",
-                              id: `${item.id}`
-                            }
                           }}
                             style={{ 'textDecoration': 'none' }}
                           >

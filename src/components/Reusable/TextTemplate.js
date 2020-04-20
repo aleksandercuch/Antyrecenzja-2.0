@@ -5,15 +5,16 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import './reusable.scss';
 import AntyrecenzjaImage from "../Reusable/AntyrecenzjaImage"
-import { Paper, Typography, Divider } from "@material-ui/core";
+import { Paper, Typography } from "@material-ui/core";
 import firebase from "../../config/firebaseConfig";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { Link } from 'react-router-dom';
 import { Markup } from 'interweave';
 import Comments from './Comments';
-import {withRouter} from "react-router-dom";
-import {compose} from 'redux';
-import {connect} from 'react-redux';
+import { withRouter } from "react-router-dom";
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { connect } from 'react-redux';
 
 class TextTemplate extends Component {
 
@@ -21,35 +22,38 @@ class TextTemplate extends Component {
     items: [],
     itemReady: false,
     commentsReady: false,
-    collection: ''
+  }
+
+  setType(type) {
+    switch (type) {
+      case 'story':
+        return 'Opowiadanie';
+      case 'post':
+        return 'Post';
+      case 'review':
+        return 'Recenzja';
+      default:
+        return '';
+    }
   }
 
   componentDidMount() {
-    if (!this.props.location.state) {
-      this.props.history.push('/')
-    } else {
-      const { collection } = this.props.location.state
-      const { id } = this.props.location.state
-      firebase.firestore().collection(collection).doc(id).get().then(item => {
-        if (!item.exists) {
-          this.props.history.push('/');
-        }
-        let items = [];
-        let tempItem = item.data();
-        tempItem.id = item.id;
-        items.push(tempItem)
-        this.setState({
-          collection: collection,
-          items: items,
-          itemReady: true
-        })
-      });
-    }
+    firebase.firestore().collection("texts").doc(this.props.match.params.id).get().then(item => {
+      if (!item.exists) {
+        this.props.history.push('/');
+      }
+      let items = [];
+      let tempItem = item.data();
+      tempItem.id = item.id;
+      items.push(tempItem)
+      this.setState({
+        items: items,
+        itemReady: true
+      })
+    });
   }
   render() {
     let items = this.state.items;
-    const { id } = this.props.location.state;
-    const { collection } = this.props.location.state;
     return (
       <>
         <Grid
@@ -71,6 +75,7 @@ class TextTemplate extends Component {
                         justify="center"
                         alignItems="flex-start"
                         spacing={3}
+                        key={item.id}
                       >
                         <Grid item xs={12}>
                           <Grid
@@ -100,38 +105,60 @@ class TextTemplate extends Component {
                                   justify="flex-start"
                                   alignItems="center"
                                 >
+                                  {item.type === "chapter" ? (
+                                    <>
+                                      <Grid item xs={12}>
+                                        <Typography variant="h5">
+                                          Ostatni Zwiastun
+                                        </Typography>
+                                      </Grid>
+                                      <Grid item xs={12}>
+                                        <Typography variant="h5">
+                                          {item.title}
+                                        </Typography>
+                                      </Grid>
+                                    </>
+                                  ) : (
+                                      <>
+                                        <Grid item xs={12}>
+                                          <Typography variant="h5">
+                                            {item.title}
+                                          </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                          {item.type !== "post" && (
+                                            <Typography variant="h5">
+                                              {item.author}
+                                            </Typography>
+                                          )}
+                                        </Grid>
+                                      </>
+                                    )}
                                   <Grid item xs={12}>
-                                    <Typography variant="h5">
-                                      {item.title}
-                                    </Typography>
+                                    <img className="reviewImage" src={item ? item.photo : "https://cdn.pixabay.com/photo/2019/07/21/13/11/portrait-4352745_960_720.jpg"} alt="error" />
                                   </Grid>
                                   <Grid item xs={12}>
-                                    <Typography variant="h5">
-                                      {item.author}
-                                    </Typography>
-                                  </Grid>
-                                  <Grid item xs={12}>
-                                    <img className="reviewImage" src={item ? item.photo : "https://cdn.pixabay.com/photo/2019/07/21/13/11/portrait-4352745_960_720.jpg"} />
-                                  </Grid>
-                                  <Grid item xs={12}>
-                                    <Link to={{
-                                      pathname: `/edycja/${item.id}`,
-                                      state: {
-                                        collection: `${this.state.collection}`,
-                                        id: `${item.id}`,
-                                        title: `${item.title}`,
-                                        content: `${item.content}`,
-                                        intro: `${item.intro}`,
-                                        photo: `${item.photo}`,
-                                        author: `${item.author}`,
-                                      }
-                                    }}
-                                      style={{ 'textDecoration': 'none' }}
-                                    >
-                                      <Button variant="contained" color="primary">
-                                        Edytuj
+                                    {this.props.admin && (
+                                      <Link to={{
+                                        pathname: `/edycja/${item.id}`,
+                                        state: {
+                                          collection: `${this.state.collection}`,
+                                          id: `${item.id}`,
+                                          title: `${item.title}`,
+                                          content: `${item.content}`,
+                                          intro: `${item.intro}`,
+                                          photo: `${item.photo}`,
+                                          author: `${item.author}`,
+                                          type: `${item.type}`,
+                                        }
+                                      }}
+                                        style={{ 'textDecoration': 'none' }}
+                                      >
+                                        <Button variant="contained" color="primary">
+                                          Edytuj
                                       </Button>
-                                    </Link>
+                                      </Link>
+                                    )}
                                   </Grid>
                                 </Grid>
                               </Grid>
@@ -148,7 +175,7 @@ class TextTemplate extends Component {
                                 >
                                   <Grid item xs={12}>
                                     <Typography variant="h6" align="center">
-                                      {item.type} {item.number}
+                                      {this.setType(item.type)}
                                     </Typography>
                                   </Grid>
                                   <Grid item xs={12}>
@@ -180,12 +207,12 @@ class TextTemplate extends Component {
                 </Grid>
               )}
           </Grid>
-          {this.state.itemReady ?  (
+          {this.state.itemReady ? (
             <Grid item xs={9}>
-             <Comments
-                user={{ userId: this.props.auth.uid, userNick: this.props.nick }}
-                docId={id}
-                collection={collection}
+              <Comments
+                user={{ userId: this.props.auth.uid, userNick: this.props.nick, userAdmin: this.props.admin }}
+                docId={this.props.match.params.id}
+                collection={"texts"}
               />
             </Grid>
           ) : (
@@ -212,10 +239,20 @@ class TextTemplate extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
+    admin: state.firebase.profile.admin,
     nick: state.firebase.profile.nick,
     profile: state.firebase.profile,
+    text: state.firestore.data['text'] && [state.firestore.data.text][0],
   }
 };
 
 export default withRouter(compose(
-  connect(mapStateToProps))(TextTemplate));
+  connect(mapStateToProps),
+  firestoreConnect(props => {
+    return [
+      {
+        collection: 'texts', doc: props.match.params.id, storeAs: "text"
+      }
+    ];
+  })
+)(TextTemplate));

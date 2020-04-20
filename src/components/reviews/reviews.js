@@ -15,7 +15,6 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 class Reviews extends Component {
 
   state = {
-    nextToRead: [],
     filteredItems: [],
     loading: true,
     allItems: [],
@@ -23,7 +22,8 @@ class Reviews extends Component {
   };
 
   componentDidMount() {
-    firebase.firestore().collection('reviews')
+    firebase.firestore().collection('texts')
+      .where("type", "==", "review")
       .orderBy("date", "desc")
       .get().then(items => {
         let filteredItems = [];
@@ -33,24 +33,12 @@ class Reviews extends Component {
           tempItem.id = item.id;
           filteredItems.push(tempItem)
         });
-        firebase.firestore().collection('nextToRead')
-          .orderBy("date", "desc")
-          .get().then(items => {
-            let nextToRead = [];
-            let last = items.docs[items.docs.length - 1];
-            items.forEach(item => {
-              let tempItem = item.data();
-              tempItem.id = item.id;
-              nextToRead.push(tempItem)
-            });
-            this.setState({
-              nextToRead: nextToRead,
-              filteredItems: filteredItems,
-              loading: false,
-              allItems: this.state.allItems.concat(filteredItems),
-              last: last
-            })
-          })
+        this.setState({
+          filteredItems: filteredItems,
+          loading: false,
+          allItems: this.state.allItems.concat(filteredItems),
+          last: last
+        })
       })
   }
 
@@ -77,7 +65,7 @@ class Reviews extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item md ={6} xs={10}>
+            <Grid item md={6} xs={10}>
               <>
                 {this.state.loading ? (
                   <Grid
@@ -124,8 +112,8 @@ class Reviews extends Component {
                         </Box>
                       </Grid>
                     ) : (
-                        <NextToRead
-                          nextToRead={this.state.nextToRead}
+                        <NextToRead 
+                        admin={this.props.admin}
                         />
                       )}
                   </>
@@ -141,7 +129,9 @@ class Reviews extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    admin: state.firebase.profile.admin,
+    profile: state.firebase.profile,
   }
 };
 

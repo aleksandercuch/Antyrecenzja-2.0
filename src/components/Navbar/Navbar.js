@@ -31,14 +31,14 @@ class Navbar extends Component {
                     <Typography variant="h5">
                       Antyrecenzja
                     </Typography>
-                    <img src="https://cdn.pixabay.com/photo/2016/10/18/19/46/vintage-1751222_960_720.png" alt="image error" height="42" width="42" />
+                    <img src="https://cdn.pixabay.com/photo/2016/10/18/19/46/vintage-1751222_960_720.png" alt="error" height="42" width="42" />
                   </Button>
                 </NavLink>
               </Grid>
 
               <Hidden>
                 <Hidden smDown>
-                  <Grid item xs={6}>
+                  <Grid item lg={6} md={7} xs={6}>
                     <Grid
                       container
                       direction="row"
@@ -88,7 +88,7 @@ class Navbar extends Component {
               </Hidden>
               <Hidden>
                 <Hidden smDown>
-                  <Grid item xs={3}>
+                  <Grid item lg={3} md={2} sm={3}>
                     {!this.props.auth.uid ?
                       <SignOutLinks />
                       :

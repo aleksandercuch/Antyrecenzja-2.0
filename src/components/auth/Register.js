@@ -1,7 +1,7 @@
 import {Component} from "react";
 import React from "react";
 import Paper from "@material-ui/core/Paper";
-import {ValidatorForm, TextValidator, SelectValidator} from 'react-material-ui-form-validator';
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";

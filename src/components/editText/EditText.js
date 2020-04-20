@@ -9,12 +9,17 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import LinearProgress from "@material-ui/core/LinearProgress";
-import { TextValidator, ValidatorForm, SelectValidator } from "react-material-ui-form-validator";
+import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
 import Paper from "@material-ui/core/Paper";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import Button from "@material-ui/core/Button";
 import firebase from "../../config/firebaseConfig";
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 
 import '../addText/uploadCHapter.scss'
@@ -27,8 +32,8 @@ class EditText extends Component {
     content: '',
     intro: '',
     url: '',
+    type: '',
     author: '',
-    collection: '',
     itemReady: false,
     showSuccess: false,
     isLoading: true,
@@ -41,12 +46,11 @@ class EditText extends Component {
   };
 
   handleSubmit = (event) => {
-    const { id } = this.props.location.state
-    event.preventDefault();
     this.setState({
       isLoading: true
     }, () => {
-      firebase.firestore().collection(this.state.collection).doc(id).update({
+      firebase.firestore().collection("texts").doc(this.props.match.params.id).update({
+        type: this.state.type,
         content: this.state.content,
         photo: this.state.url,
         title: this.state.title,
@@ -67,13 +71,6 @@ class EditText extends Component {
     });
   };
 
-  handleFormError = () => {
-    let words = this.state.content.replace(/<[^>]*>/g, " ");
-    words = words.replace(/\s+/g, ' ').trim();
-    words = words.split(" ").length;
-
-  };
-
   componentDidMount() {
     if (!this.props.location.state) {
       this.props.history.push('/')
@@ -84,6 +81,7 @@ class EditText extends Component {
       const { title } = this.props.location.state
       const { intro } = this.props.location.state
       const { author } = this.props.location.state
+      const { type } = this.props.location.state
 
       this.setState({
         content: content,
@@ -93,11 +91,14 @@ class EditText extends Component {
         collection: collection,
         author: author,
         isLoading: false,
+        type: type,
       });
     }
   }
   render() {
+    const { admin } = this.props;
 
+    if (!admin) return <Redirect to='/' />;
     return (
       <Paper>
         <Snackbar
@@ -175,7 +176,6 @@ class EditText extends Component {
               ) : (
                   <ValidatorForm
                     onSubmit={this.handleSubmit}
-                    onError={this.handleFormError}
                   >
                     <Grid
                       container
@@ -206,11 +206,11 @@ class EditText extends Component {
                       </Grid>
                       <Grid item xs={12}>
                         <TextValidator
-                          label="Collection"
+                          label="Rodzaj tekstu (post/review/chapter/story)"
                           onChange={this.handleChange}
-                          name="collection"
+                          name="type"
                           fullWidth
-                          value={this.state.collection}
+                          value={this.state.type}
                           validators={['required']}
                           errorMessages={['this field is required']}
                         />
@@ -294,4 +294,23 @@ class EditText extends Component {
   }
 }
 
-export default EditText;
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    admin: state.firebase.profile.admin,
+    profile: state.firebase.profile,
+    text: state.firestore.data['text'] && [state.firestore.data.text][0],
+  }
+};
+
+export default withRouter(compose(
+  connect(mapStateToProps),
+  firestoreConnect(props => {
+    return [
+      {
+        collection: 'texts', doc: props.match.params.id, storeAs: "text"
+      }
+    ];
+  })
+)(EditText));
+
