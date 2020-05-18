@@ -1,10 +1,12 @@
 import { Component } from "react";
 import React from "react";
+
+import './about.scss';
+
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import './about.scss';
 
 class MyHistory extends Component {
 

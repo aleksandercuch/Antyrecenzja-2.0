@@ -1,14 +1,16 @@
 import {Component} from "react";
 import React from "react";
-import Paper from "@material-ui/core/Paper";
+import {Redirect} from "react-router-dom";
+import {connect} from 'react-redux'
+
+import {signUp} from "../../store/actions/authActions";
+import './auth.scss'
+
 import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import {connect} from 'react-redux'
-import {signUp} from "../../store/actions/authActions";
-import {Redirect} from "react-router-dom";
-import './auth.scss'
 import Typography from "@material-ui/core/Typography";
 
 class Register extends Component {

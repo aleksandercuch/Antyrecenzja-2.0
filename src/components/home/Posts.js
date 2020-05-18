@@ -1,15 +1,16 @@
 import { Component } from "react";
 import React from "react";
+import { Link } from 'react-router-dom';
+import moment from 'moment';
+
 import './home.scss';
+
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import { Link } from 'react-router-dom';
-import moment from 'moment';
 
 class Posts extends Component {
-
   render() {
     let posts = this.props.posts;
     return (

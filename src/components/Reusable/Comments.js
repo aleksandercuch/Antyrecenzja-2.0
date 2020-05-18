@@ -1,4 +1,9 @@
 import React, { Component } from 'react'
+import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+import moment from 'moment';
+
+import firebase from "../../config/firebaseConfig";
+
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -7,15 +12,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import firebase from "../../config/firebaseConfig";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import CheckCircleIcon from "@material-ui/core/SvgIcon/SvgIcon";
 import IconButton from "@material-ui/core/IconButton";
 import Snackbar from "@material-ui/core/Snackbar";
 import CloseIcon from '@material-ui/icons/Close';
 import Box from "@material-ui/core/Box";
-import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import moment from 'moment';
 
 const initialState = {
   text: '',
@@ -77,19 +79,22 @@ class Comments extends Component {
           unlogged: false,
           date: new Date(),
         }).then(() => {
-          this.setState({
-            isLoading: false,
-            showSuccess: true,
-            text: ''
-          }, () => {
-            setTimeout(() => {
-              this.setState({
-                showSuccess: false
-              });
-            }, 3000);
-            this.enhanceComments();
+          firebase.firestore().collection(this.props.collection).doc(this.props.docId).update({
+            newComments: true
+          }).then(r => {
+            this.setState({
+              isLoading: false,
+              showSuccess: true,
+              text: ''
+            }, () => {
+              setTimeout(() => {
+                this.setState({
+                  showSuccess: false
+                });
+              }, 3000);
+              this.enhanceComments();
+            })
           })
-
         })
       });
     } else {

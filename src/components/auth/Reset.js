@@ -1,16 +1,18 @@
 import { Component } from "react";
 import React from "react";
+import { connect } from 'react-redux'
+import { Redirect } from "react-router-dom";
+
+import { signIn } from "../../store/actions/authActions";
+import './auth.scss'
+import firebase from "../../config/firebaseConfig";
+
+import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import { signIn } from "../../store/actions/authActions";
-import { connect } from 'react-redux'
-import { Redirect } from "react-router-dom";
-import Typography from "@material-ui/core/Typography";
-import './auth.scss'
-import firebase from "../../config/firebaseConfig";
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";

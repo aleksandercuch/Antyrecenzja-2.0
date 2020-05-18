@@ -1,10 +1,12 @@
 import { Component } from "react";
 import React from "react";
+
+import './home.scss';
+
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
 import Link from "@material-ui/core/Link";
-import './home.scss';
 import Divider from '@material-ui/core/Divider';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
@@ -71,7 +73,7 @@ class Description extends Component {
                           <Grid item xs={12}>
                             <Typography variant="body1">
                               Facebook
-                              </Typography>
+                            </Typography>
                           </Grid>
                         </Grid>
                       </Link>
@@ -109,7 +111,7 @@ class Description extends Component {
                           <Grid item xs={12}>
                             <Typography variant="body1">
                               LinkedIn
-                              </Typography>
+                            </Typography>
                           </Grid>
                         </Grid>
                       </Link>

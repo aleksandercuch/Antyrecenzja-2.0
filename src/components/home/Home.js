@@ -1,18 +1,20 @@
 import { Component } from "react";
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import { connect } from 'react-redux';
 import { compose } from "redux";
-import './home.scss';
 
+import './home.scss';
 import LastNews from "./LastNews"
 import Description from "./Description"
 import Carousel from "./Carousel"
 import Posts from "./Posts"
-import CircularProgress from "@material-ui/core/CircularProgress";
 import firebase from "../../config/firebaseConfig";
 
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import { Link } from 'react-router-dom'
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 class Home extends Component {
 
@@ -25,7 +27,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-      firebase.firestore().collection('texts')
+    firebase.firestore().collection('texts')
       .where("type", "==", "post")
       .orderBy("date", "desc")
       .get().then(posts => {
@@ -35,28 +37,26 @@ class Home extends Component {
           tempPost.id = post.id;
           filteredPosts.push(tempPost)
         });
-          firebase.firestore().collection('texts')
+        firebase.firestore().collection('texts')
           .where("newsTable", "==", true)
           .orderBy("date", "desc")
           .limit(2)
           .get().then(items => {
             let filteredItems = [];
             items.forEach(item => {
-              let tempItem= item.data();
+              let tempItem = item.data();
               tempItem.id = item.id;
               filteredItems.push(tempItem)
             });
-                this.setState({
-                  filteredExpoItems: filteredItems,
-                  filteredPosts: filteredPosts,
-                  loading: false,
-                  allPosts: this.state.allPosts.concat(filteredPosts),
-                })
-            
+            this.setState({
+              filteredExpoItems: filteredItems,
+              filteredPosts: filteredPosts,
+              loading: false,
+              allPosts: this.state.allPosts.concat(filteredPosts),
+            })
           })
       })
   }
-
   render() {
     return (
       <>
@@ -72,7 +72,7 @@ class Home extends Component {
               <Carousel />
             </Grid>
             <Grid item md={6} xs={10}>
-            <>
+              <>
                 {this.state.loading ? (
                   <Grid
                     container
@@ -94,7 +94,28 @@ class Home extends Component {
               </>
             </Grid>
             <Grid item md={3} xs={10}>
-              <Description />
+              <Grid
+                container
+                direction="row"
+                justify="center"
+                alignItems="center"
+                spacing={2}
+              >
+                <Grid item xs={12}>
+                  <Description />
+                </Grid>
+                {this.props.admin && (
+                  <Grid item>
+                    <Link to={{
+                      pathname: `/admin`,
+                    }}
+                      style={{ 'textDecoration': 'none' }}
+                    >
+                      <Button color="primary" variant="contained">Panel Kontrolny</Button>
+                    </Link>
+                  </Grid>
+                )}
+              </Grid>
             </Grid>
             <Grid item md={9} xs={10}>
               <>

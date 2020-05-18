@@ -1,4 +1,13 @@
 import React, { Component } from "react";
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+import { Redirect } from "react-router-dom";
+
+import firebase from "../../config/firebaseConfig";
+import '../addText/uploadCHapter.scss'
+
 import Snackbar from "@material-ui/core/Snackbar";
 import SnackbarContent from "@material-ui/core/SnackbarContent";
 import Typography from "@material-ui/core/Typography";
@@ -14,15 +23,6 @@ import Paper from "@material-ui/core/Paper";
 import CKEditor from "@ckeditor/ckeditor5-react";
 import DecoupledEditor from "@ckeditor/ckeditor5-build-decoupled-document";
 import Button from "@material-ui/core/Button";
-import firebase from "../../config/firebaseConfig";
-import { firestoreConnect } from 'react-redux-firebase'
-import { compose } from 'redux'
-import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
-import { Redirect } from "react-router-dom";
-
-
-import '../addText/uploadCHapter.scss'
 
 class EditText extends Component {
 

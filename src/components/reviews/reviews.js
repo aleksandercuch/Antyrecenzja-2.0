@@ -1,15 +1,17 @@
 import { Component } from "react";
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Description from "../home/Description"
+import { connect } from 'react-redux';
+import { compose } from "redux";
+
 import AllReviews from "./allReviews"
 import NextToRead from "./nextToRead"
 import './reviews.scss';
 import AntyrecenzjaImage from "../Reusable/AntyrecenzjaImage"
-import { connect } from 'react-redux';
-import { compose } from "redux";
 import firebase from "../../config/firebaseConfig";
+
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Description from "../home/Description"
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 class Reviews extends Component {

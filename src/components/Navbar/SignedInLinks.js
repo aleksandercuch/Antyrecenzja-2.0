@@ -1,11 +1,14 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { signOut } from "../../store/actions/authActions"
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from "react-router-dom";
+
+import { signOut } from "../../store/actions/authActions";
+
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import { Link } from "react-router-dom"
+
 
 const SignedInLinks = (props) => {
   return (

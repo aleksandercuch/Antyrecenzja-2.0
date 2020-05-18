@@ -1,20 +1,22 @@
 import { Component } from "react";
 import React from "react";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
-import './reusable.scss';
-import AntyrecenzjaImage from "../Reusable/AntyrecenzjaImage"
-import { Paper, Typography } from "@material-ui/core";
-import firebase from "../../config/firebaseConfig";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { Link } from 'react-router-dom';
 import { Markup } from 'interweave';
-import Comments from './Comments';
 import { withRouter } from "react-router-dom";
 import { firestoreConnect } from 'react-redux-firebase'
 import { compose } from 'redux'
 import { connect } from 'react-redux';
+
+import './reusable.scss';
+import AntyrecenzjaImage from "../Reusable/AntyrecenzjaImage"
+import firebase from "../../config/firebaseConfig";
+import Comments from './Comments';
+
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { Paper, Typography } from "@material-ui/core";
 
 class TextTemplate extends Component {
 

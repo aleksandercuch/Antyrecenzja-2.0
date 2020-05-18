@@ -1,11 +1,13 @@
 import { Component } from "react";
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
+
 import './about.scss';
 import PhotoPanel from "./photoPanel"
 import MyHistory from "./myHistory"
 import AntyrecenzjaImage from "../Reusable/AntyrecenzjaImage"
+
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 
 class AboutMe extends Component {
 

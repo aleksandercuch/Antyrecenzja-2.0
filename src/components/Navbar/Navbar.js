@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
+import { NavLink } from 'react-router-dom';
+
+import SmallNavbar from "./SmallNavbar";
+import SignOutLinks from "./SignedOutLinks";
+import SignedInLinks from "./SignedInLinks";
+
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import './Navbar.scss';
-import { connect } from "react-redux";
-import SignOutLinks from "./SignedOutLinks"
-import SignedInLinks from "./SignedInLinks"
-import { NavLink } from 'react-router-dom'
 import Hidden from '@material-ui/core/Hidden';
-import SmallNavbar from "./SmallNavbar"
 
 class Navbar extends Component {
   render() {
@@ -24,7 +25,6 @@ class Navbar extends Component {
               justify="space-between"
               alignItems="center"
             >
-
               <Grid item md={3} xs={11}>
                 <NavLink to="/" style={{ 'textDecoration': 'none' }}>
                   <Button style={{ 'textTransform': 'none' }}>
@@ -35,7 +35,6 @@ class Navbar extends Component {
                   </Button>
                 </NavLink>
               </Grid>
-
               <Hidden>
                 <Hidden smDown>
                   <Grid item lg={6} md={7} xs={6}>

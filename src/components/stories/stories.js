@@ -1,12 +1,13 @@
 import { Component } from "react";
 import React from "react";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import Description from "../home/Description"
 import MyWorks from "./myWorks"
 import './stories.scss';
 import AntyrecenzjaImage from "../Reusable/AntyrecenzjaImage"
 import firebase from "../../config/firebaseConfig";
+
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 class Stories extends Component {

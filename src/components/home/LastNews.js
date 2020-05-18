@@ -1,20 +1,22 @@
 import { Component } from "react";
 import React from "react";
+
+import './home.scss';
+
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import { Link } from 'react-router-dom'
 import Typography from "@material-ui/core/Typography";
 import Divider from '@material-ui/core/Divider';
-import './home.scss';
-import { Link } from 'react-router-dom'
 
-class Posts extends Component {
+class LastNews extends Component {
 
   state = {};
 
   render() {
     let items = this.props.items;
-
+    let count = 0;
     return (
       <>
         <Paper className="padding">
@@ -63,8 +65,9 @@ class Posts extends Component {
                   <Divider variant="fullWidth" />
                 </Grid>
                 {items.map(item => {
+                  count = count + 1;
                   return (
-                    <Grid item xs={6} key={item.id} style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .2)', padding: '0.5em' }}>
+                    <Grid item xs={6} key={item.id} style={count === 1 ? { borderRight: '0.1em ridge rgba(0, 0, 0, .2)' } : {}}>
                       <Grid
                         container
                         direction="column"
@@ -126,4 +129,4 @@ class Posts extends Component {
 
 
 
-export default Posts;
+export default LastNews;

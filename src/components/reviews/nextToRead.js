@@ -1,14 +1,16 @@
 import { Component } from "react";
 import React from "react";
+import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
+
+import firebase from "../../config/firebaseConfig";
+import './reviews.scss';
+
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography"
 import CircularProgress from "@material-ui/core/CircularProgress";
-import firebase from "../../config/firebaseConfig";
-import { TextValidator, ValidatorForm } from "react-material-ui-form-validator";
-import './reviews.scss';
 
 class NextToRead extends Component {
 
@@ -131,7 +133,7 @@ class NextToRead extends Component {
                           <Box p={2}>
                             <Button type="submit" variant="contained" color="primary">
                               Dodaj
-                          </Button>
+                            </Button>
                           </Box>
                         </Grid>
                       </Grid>

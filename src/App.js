@@ -13,6 +13,7 @@ import SignIn from "./components/auth/SignIn"
 import ResetPassword from "./components/auth/Reset"
 import LogOut from "./components/auth/LogOut"
 import UploadText from "./components/addText/UploadText"
+import ControlPanel from "./components/controlPanel/control"
 import EditText from "./components/editText/EditText"
 import './App.scss';
 
@@ -33,7 +34,8 @@ class App extends Component {
           <Route exact path='/wylogowywanie' component={LogOut} /> 
           <Route exact path='/add' component={UploadText} /> 
           <Route exact path='/edycja/:id' component={EditText} />
-          <Route exact path='/reset' component={ResetPassword} />  
+          <Route exact path='/reset' component={ResetPassword} />
+          <Route exact path='/admin' component={ControlPanel} />    
           <Footer /> 
         </BrowserRouter>
       </div>
