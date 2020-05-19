@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
 
+import SigenInLinks from './SignedInLinks'
+
 import { makeStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Button from '@material-ui/core/Button';
@@ -18,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TemporaryDrawer() {
+export default function TemporaryDrawer({auth}) {
   const classes = useStyles();
   const [state, setState] = React.useState({
     top: false,
@@ -72,20 +74,27 @@ export default function TemporaryDrawer() {
           </ListItem>
         </NavLink>
         <hr />
-        <NavLink to="/logowanie" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
-          <ListItem button="true">
-            <Box fontWeight="fontWeightBold">
-              Logowanie
-            </Box>
-          </ListItem>
-        </NavLink>
-        <NavLink to="/rejestracja" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
-          <ListItem button="true">
-            <Box fontWeight="fontWeightBold">
-              Rejestracja
-            </Box>
-          </ListItem>
-        </NavLink>
+        {auth ?
+          (
+            <SigenInLinks />
+          ) : (
+            <>
+              <NavLink to="/logowanie" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
+                <ListItem button="true">
+                  <Box fontWeight="fontWeightBold">
+                    Logowanie
+                  </Box>
+                </ListItem>
+              </NavLink>
+              <NavLink to="/rejestracja" style={{ 'color': 'inherit', 'textDecoration': 'none' }}>
+                <ListItem button="true">
+                  <Box fontWeight="fontWeightBold">
+                    Rejestracja
+                  </Box>
+                </ListItem>
+              </NavLink>
+            </>
+          )}
       </List>
     </div>
   );

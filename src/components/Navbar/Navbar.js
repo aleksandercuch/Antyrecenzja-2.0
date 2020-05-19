@@ -99,7 +99,9 @@ class Navbar extends Component {
               <Hidden>
                 <Hidden mdUp>
                   <Grid item xs={1}>
-                    <SmallNavbar />
+                    <SmallNavbar 
+                      auth={this.props.auth.uid}
+                    />
                   </Grid>
                 </Hidden>
               </Hidden>

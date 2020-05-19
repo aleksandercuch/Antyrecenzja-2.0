@@ -13,7 +13,7 @@ class Antyrecenzja extends Component {
       <>
         <Box>
           <Link to="">
-            <img className="logoImage" src="https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/87851774_197975394895259_2913424394464264192_n.png?_nc_cat=108&_nc_sid=dd9801&_nc_ohc=rsST957pfuIAX_25vHJ&_nc_ht=scontent-waw1-1.xx&oh=a06df2fc2c09aa82786a85a35a6950dc&oe=5EE710B6" alt="logo error" />
+            <img className="logoImage" src="https://firebasestorage.googleapis.com/v0/b/antyrecenzja-a7320.appspot.com/o/images%2Fimage.png?alt=media&token=bbadb6f6-8a7c-4a04-8c0d-9249894ce59e" alt="logo error" />
           </Link>
         </Box>
       </>

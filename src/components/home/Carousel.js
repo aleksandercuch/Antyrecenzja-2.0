@@ -17,8 +17,8 @@ class Carousels extends Component {
         <Hidden mdDown>
           <Carousel
             centered
-            autoPlay={5000}
-            animationSpeed={1500}
+            autoPlay={6000}
+            animationSpeed={2000}
             infinite
             slidesPerPage={2}
             dots
@@ -33,8 +33,8 @@ class Carousels extends Component {
         <Hidden lgUp smDown>
           <Carousel
             centered
-            autoPlay={5000}
-            animationSpeed={1500}
+            autoPlay={6000}
+            animationSpeed={2000}
             infinite
             slidesPerPage={2}
             dots
@@ -49,8 +49,8 @@ class Carousels extends Component {
         <Hidden mdUp xsDown>
           <Carousel
             centered
-            autoPlay={5000}
-            animationSpeed={1500}
+            autoPlay={6000}
+            animationSpeed={2000}
             infinite
             slidesPerPage={2}
             dots
@@ -65,8 +65,8 @@ class Carousels extends Component {
         <Hidden smUp>
           <Carousel
             centered
-            autoPlay={5000}
-            animationSpeed={1500}
+            autoPlay={6000}
+            animationSpeed={2000}
             infinite
             slidesPerPage={2}
             dots
