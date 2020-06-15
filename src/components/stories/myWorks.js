@@ -115,19 +115,16 @@ class MyWorks extends Component {
                                     <Grid
                                       container
                                       direction="row"
-                                      justify="flex-start"
+                                      justify="space-between"
                                       alignItems="flex-start"
                                       spacing={1}
                                     >
-                                      <Grid item xs={12}>
-                                        <Divider />
-                                      </Grid>
-                                      <Grid item xs={9}>
+                                      <Grid item lg={9} sm={8} xs={12}>
                                         <Typography variant="h6">
-                                          Rozdział {chapter.number} - {chapter.title}
+                                          {chapter.title}
                                         </Typography>
                                       </Grid>
-                                      <Grid item xs={3}>
+                                      <Grid item lg={3} sm={4} xs={12}>
                                         <Link to={{
                                           pathname: `/tekst/${chapter.id}`,
                                           state: {
@@ -139,6 +136,9 @@ class MyWorks extends Component {
                                         >
                                           <Button variant="contained">Czytaj</Button>
                                         </Link>
+                                      </Grid>
+                                      <Grid item xs={12}>
+                                        <hr />
                                       </Grid>
                                     </Grid>
                                   </Grid>
@@ -166,8 +166,8 @@ class MyWorks extends Component {
               >
                 <Grid item xs={12}>
                   <Typography variant="h5">
-                    Inne
-								</Typography>
+                    Opowiadania
+								  </Typography>
                 </Grid>
                 {others.map(story => {
                   return (

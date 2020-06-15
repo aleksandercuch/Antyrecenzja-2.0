@@ -6,6 +6,7 @@ import './stories.scss';
 import AntyrecenzjaImage from "../Reusable/AntyrecenzjaImage"
 import firebase from "../../config/firebaseConfig";
 
+import Hidden from '@material-ui/core/Hidden';
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -33,7 +34,7 @@ class Stories extends Component {
         });
         firebase.firestore().collection('texts')
           .where("type", "==", "story")
-          .orderBy("date", "desc")
+          .orderBy("date")
           .get().then(items => {
             let filteredOthers = [];
             let last = items.docs[items.docs.length - 1];
@@ -63,7 +64,7 @@ class Stories extends Component {
             alignItems="flex-start"
             spacing={3}
           >
-          <Grid item xs={12}>
+            <Grid item xs={12}>
               <Grid
                 container
                 direction="column"
@@ -76,7 +77,7 @@ class Stories extends Component {
               </Grid>
             </Grid>
             <Grid item md={6} xs={10}>
-            <>
+              <>
                 {this.state.loading ? (
                   <Grid
                     container
@@ -98,7 +99,9 @@ class Stories extends Component {
               </>
             </Grid>
             <Grid item md={3} xs={10}>
-              <Description />
+              <Hidden xsDown>
+                <Description />
+              </Hidden>
             </Grid>
           </Grid>
         </Box>

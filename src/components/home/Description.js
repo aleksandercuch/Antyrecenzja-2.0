@@ -1,12 +1,13 @@
 import { Component } from "react";
 import React from "react";
+import { Link } from 'react-router-dom';
 
 import './home.scss';
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Link from "@material-ui/core/Link";
+import Links from "@material-ui/core/Link";
 import Divider from '@material-ui/core/Divider';
 import FacebookIcon from '@material-ui/icons/Facebook';
 import InstagramIcon from '@material-ui/icons/Instagram';
@@ -60,7 +61,7 @@ class Description extends Component {
                     alignItems="center"
                   >
                     <Grid item xs={4}>
-                      <Link href="https://www.facebook.com/Antyrecenzja/?modal=admin_todo_tour" style={{ 'textDecoration': 'none' }}>
+                      <Links href="https://www.facebook.com/Antyrecenzja/?modal=admin_todo_tour" style={{ 'textDecoration': 'none' }}>
                         <Grid
                           container
                           direction="column"
@@ -76,10 +77,10 @@ class Description extends Component {
                             </Typography>
                           </Grid>
                         </Grid>
-                      </Link>
+                      </Links>
                     </Grid>
                     <Grid item xs={4}>
-                      <Link href="https://www.instagram.com/aleksandercuch/" style={{ 'textDecoration': 'none' }}>
+                      <Links href="https://www.instagram.com/aleksandercuch/" style={{ 'textDecoration': 'none' }}>
                         <Grid
                           container
                           direction="column"
@@ -95,10 +96,10 @@ class Description extends Component {
                             </Typography>
                           </Grid>
                         </Grid>
-                      </Link>
+                      </Links>
                     </Grid>
                     <Grid item xs={4}>
-                      <Link href="https://www.linkedin.com/in/aleksander-cuch-161118180/" style={{ 'textDecoration': 'none' }}>
+                      <Links href="https://www.linkedin.com/in/aleksander-cuch-161118180/" style={{ 'textDecoration': 'none' }}>
                         <Grid
                           container
                           direction="column"
@@ -114,7 +115,7 @@ class Description extends Component {
                             </Typography>
                           </Grid>
                         </Grid>
-                      </Link>
+                      </Links>
                     </Grid>
                   </Grid>
                 </Grid>

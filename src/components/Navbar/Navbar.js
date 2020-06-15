@@ -31,7 +31,7 @@ class Navbar extends Component {
                     <Typography variant="h5">
                       Antyrecenzja
                     </Typography>
-                    <img src="https://cdn.pixabay.com/photo/2016/10/18/19/46/vintage-1751222_960_720.png" alt="error" height="42" width="42" />
+                    <img src="https://firebasestorage.googleapis.com/v0/b/antyrecenzja-a7320.appspot.com/o/images%2Fminiature.webp?alt=media&token=909a629a-d5f5-466e-81e5-4a7cfa74bdd1" alt="error" height="42" width="42" />
                   </Button>
                 </NavLink>
               </Grid>

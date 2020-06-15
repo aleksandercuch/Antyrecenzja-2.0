@@ -112,7 +112,7 @@ class Footer extends Component {
                   >
                     <Grid item>
                       <Box mb={4}>
-                        <Typography variant="body1">Copyright© 2019. All rights reserved.</Typography>
+                        <Typography variant="body1">Copyright© 2020. All rights reserved.</Typography>
                       </Box>
                     </Grid>
                   </Grid>

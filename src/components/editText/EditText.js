@@ -258,8 +258,6 @@ class EditText extends Component {
                                 const data = editor.getData();
                                 this.setState({
                                   content: data
-                                }, () => {
-                                  this.handleFormError();
                                 });
                               }}
                             />

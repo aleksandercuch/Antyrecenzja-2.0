@@ -170,11 +170,13 @@ class NextToRead extends Component {
                                 </Grid>
                               </Grid>
                             </Grid>
-                            <Grid item>
-                              <Button variant="contained" color="secondary" onClick={(event) => this.deleteItem(event, item.id)}>
-                                Usuń
-                              </Button>
-                            </Grid>
+                            {this.props.admin && (
+                              <Grid item>
+                                <Button variant="contained" color="secondary" onClick={(event) => this.deleteItem(event, item.id)}>
+                                  Usuń
+                                </Button>
+                              </Grid>
+                            )}
                             <Grid item xs={12}>
                               <Typography variant="h5">
                                 <hr />

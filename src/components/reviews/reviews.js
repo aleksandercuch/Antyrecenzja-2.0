@@ -9,6 +9,7 @@ import './reviews.scss';
 import AntyrecenzjaImage from "../Reusable/AntyrecenzjaImage"
 import firebase from "../../config/firebaseConfig";
 
+import Hidden from '@material-ui/core/Hidden';
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Description from "../home/Description"
@@ -96,9 +97,11 @@ class Reviews extends Component {
                 alignItems="center"
                 spacing={8}
               >
-                <Grid item xs={12}>
-                  <Description />
-                </Grid>
+                <Hidden xsDown>
+                  <Grid item xs={12}>
+                    <Description />
+                  </Grid>
+                </Hidden>
                 <Grid item xs={12}>
                   <>
                     {this.state.loading ? (
@@ -114,8 +117,8 @@ class Reviews extends Component {
                         </Box>
                       </Grid>
                     ) : (
-                        <NextToRead 
-                        admin={this.props.admin}
+                        <NextToRead
+                          admin={this.props.admin}
                         />
                       )}
                   </>

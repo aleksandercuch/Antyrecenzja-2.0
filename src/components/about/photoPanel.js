@@ -36,7 +36,7 @@ class PhotoPanel extends Component {
                 spacing={2}
               >
                 <Grid item xs={12}>
-                  <img className="photoPanelImage" src="https://scontent-waw1-1.xx.fbcdn.net/v/t1.0-9/14141633_1111643665597304_5943056743569652872_n.jpg?_nc_cat=102&_nc_sid=7aed08&_nc_ohc=m9YfqsAHSyIAX_xMFBV&_nc_ht=scontent-waw1-1.xx&oh=8c47f7e3602b9a2bfefe9484035a2025&oe=5EF46B3C" alt="error" />
+                  <img className="photoPanelImage" src="https://firebasestorage.googleapis.com/v0/b/antyrecenzja-a7320.appspot.com/o/images%2Favatar.jpg?alt=media&token=e3344d0b-9c4f-4ae7-a867-4941b89d6746" alt="error" />
                 </Grid>
               </Grid>
             </Grid>
