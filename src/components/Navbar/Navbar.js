@@ -9,15 +9,17 @@ import SignedInLinks from "./SignedInLinks";
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import AppBar from '@material-ui/core/AppBar';
+import Paper from '@material-ui/core/Paper';
 import Toolbar from '@material-ui/core/Toolbar';
 import Hidden from '@material-ui/core/Hidden';
+import {grey} from "@material-ui/core/colors";
 
 class Navbar extends Component {
   render() {
+    let colour = grey[200];
     return (
       <>
-        <AppBar className="navbar" position="static" color="default">
+        <Paper square="false" className="navbar" style={{ 'backgroundColor': `${colour}` }}>
           <Toolbar>
             <Grid
               container
@@ -107,7 +109,7 @@ class Navbar extends Component {
               </Hidden>
             </Grid>
           </Toolbar>
-        </AppBar>
+        </Paper>
       </>
     )
   }

@@ -17,7 +17,7 @@ class AboutMe extends Component {
         <Box>
           <Grid
             container
-            direction="row"
+            direction="row-reverse"
             justify="center"
             alignItems="flex-start"
             spacing={3}
@@ -34,11 +34,11 @@ class AboutMe extends Component {
                 </Grid>
               </Grid>
             </Grid>
-            <Grid item md={6} xs={10}>
-              <MyHistory />
-            </Grid>
             <Grid item md={3} xs={10}>
               <PhotoPanel />
+            </Grid>
+            <Grid item md={6} xs={10}>
+              <MyHistory />
             </Grid>
           </Grid>
         </Box>

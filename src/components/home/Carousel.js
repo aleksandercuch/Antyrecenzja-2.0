@@ -1,6 +1,8 @@
 import { Component } from "react";
 import React from "react";
 
+import WebsiteImage from "../Reusable/AntyrecenzjaImage"
+
 import './home.scss';
 import Carousel from '@brainhubeu/react-carousel';
 import '@brainhubeu/react-carousel/lib/style.css';
@@ -63,19 +65,7 @@ class Carousels extends Component {
           </Carousel>
         </Hidden>
         <Hidden smUp>
-          <Carousel
-            centered
-            autoPlay={6000}
-            animationSpeed={2000}
-            infinite
-            slidesPerPage={2}
-            dots
-            draggable={true}
-          >
-            <img className="carouselImage" src={img1} alt="error" />
-            <img className="carouselImage" src={img2} alt="error" />
-            <img className="carouselImage" src={img3} alt="error" />
-          </Carousel>
+          <WebsiteImage />
         </Hidden>
       </>
     );

@@ -11,6 +11,7 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import Hidden from '@material-ui/core/Hidden';
 
 class AllReviews extends Component {
 
@@ -63,7 +64,12 @@ class AllReviews extends Component {
                           }}
                             style={{ 'textDecoration': 'none' }}
                           >
-                            <img style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .05)', padding: '2em' }} className="reviewImage" src={review.photo} alt="error" />
+                            <Hidden xsDown>
+                              <img style={{ borderRight: '0.1em ridge rgba(0, 0, 0, .09)', padding: '2em' }} className="reviewImage" src={review.photo} alt="error" />
+                            </Hidden>
+                            <Hidden smUp>
+                              <img style={{ padding: '2em' }} className="reviewImageSmall" src={review.photo} alt="error" />
+                            </Hidden>
                           </Link>
                         </Grid>
                         <Grid item sm={7} xs={12}>
