@@ -8,6 +8,7 @@ import LastNews from "./LastNews"
 import Description from "./Description"
 import Carousel from "./Carousel"
 import Posts from "./Posts"
+import NewsLetter from "./NewsLetter"
 import firebase from "../../config/firebaseConfig";
 
 import Grid from "@material-ui/core/Grid";
@@ -138,6 +139,26 @@ class Home extends Component {
                   )}
               </>
             </Grid>
+            {/*<Grid item md={9} xs={10}>
+              <>
+                {this.state.loading ? (
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                    spacing={1}
+                  >
+                    <Box p={2}>
+                      <CircularProgress />
+                    </Box>
+                  </Grid>
+                ) : (
+                    <NewsLetter/>
+                  )}
+              </>
+            </Grid>
+            */}
           </Grid>
         </Box>
       </>
